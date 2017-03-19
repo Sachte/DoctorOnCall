@@ -1,0 +1,92 @@
+
+
+<div class="modal"  >
+ 
+    <ion-content>
+   
+        <div class="card">
+         
+            <div class="item  item-divider">
+                <div class="row ">
+                    <div class="col-25">
+                        <img ng-src={{data.icontexturl}} width="40">
+                    </div>
+                    <div class="col-50">
+                        <label class="h3  ">   Prescription </label>
+                    </div>
+                    <div class="col-25">
+
+                        <label class="control-label" date-now="MM/dd/yyyy">    </label>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col">
+                                       
+                    <div class="row ">
+                        <div class="col">
+                            <label class="control-label">
+                                Patient :
+
+                                {{pItem.customer.FirstName}}&nbsp;&nbsp;{{pItem.customer.LastName}}&nbsp;&nbsp;
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col">
+                            <label class="control-label">
+
+                                {{pItem.customer.HomeLocation.formatted_address}} {{pItem.customer.MobileNumber}}
+                            </label>
+
+                        </div>
+                    </div>
+                       
+                    </div>
+                </div>
+            </div>
+<img ng-src={{data.prescriptionsymbol}} width="20" height="20">
+ <div class="item item-text-wrap">
+                    <div class="row ">
+                        <div class="col" >
+                            <pre> {{pItem.prescriptionText}} </pre>
+                        </div>
+
+                    </div>
+
+                    <div class="row ">
+                        <div class="col">
+                            <img ng-src={{pItem.imageUrl}}>
+                        </div>
+
+                    </div>
+                   
+                </div>
+                <div class="class=item item-divider">
+                    <div class="row ">
+                        <div class="col">
+                            <label class="control-label">
+                                Doctor :
+
+                                {{pItem.provider.FirstName}}&nbsp;&nbsp;{{pItem.provider.LastName}}&nbsp;&nbsp;
+
+                                Registration Number :
+                                {{ pItem.provider.ProviderLicense}}
+                            </label><br />
+
+                            <label class="control-label">
+
+                                <b> {{pItem.provider.EndLocation.formatted_address}} {{pItem.provider.MobileNumber}}</b>
+                            </label>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+</ion-content>
+<div class="bar bar-footer bar-positive">
+    <a class="title" ng-click="closePrescription()">Close</a>
+</div>
+  
+</div>

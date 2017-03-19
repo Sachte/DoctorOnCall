@@ -1,0 +1,44 @@
+﻿
+<ion-view title="Organization Details">
+    <form name="detailOrganization" novalidate="" ng-submit="organizationSave(detailOrganization)">
+    <ion-content has-header="true" padding="true">
+        <div class="card">
+
+            <h3>Step 4 of 5- Please fill in some information about your employer/school </h3>
+            <div class="item item-divider">
+                Organization Details
+            </div>
+
+            <label class="item item-input validated" ng-class="{ 'has-errors' : detailOrganization.organizationName.$invalid, 'no-errors' : detailOrganization.organizationName.$invalid}">
+                <span class="input-label">Name</span>
+                <input ng-disabled="false" name="organizationName" type="text" placeholder="Irvine-DIRECTV Organization" ng-model="organization.OrganizationName" required>
+            </label>
+
+            <div class="error-container" ng-show=" detailOrganization.organizationName.$error" ng-messages="detailOrganization.organizationName.$error" ng-if='detailOrganization.organizationName.$dirty' > <div ng-messages-include="error-list.html"> </div> </div>
+
+
+            <label class="item item-input validated " ng-class="{ 'has-errors' : detailOrganization.StartAddress.$invalid, 'no-errors' : detailOrganization.StartAddress.$valid}">
+                <span class="input-label">Address</span>
+                <ion-google-place ng-disabled="false" name="Address" ng-displayaddress="organization.OrganizationLocation.formatted_address" placeholder="Enter Address" ng-model="data.OrganizationLocation" required />
+            </label>
+            <div class="error-container" ng-show=" detailOrganization.StartAddress.$error" ng-messages="detailOrganization.StartAddress.$error" ng-if='detailOrganization.StartAddress.$dirty' > <div ng-messages-include="error-list.html"> </div> </div>
+
+
+        </div>
+
+    </ion-content>
+    <ion-footer-bar class="item-input-inset">
+
+
+        <div class="button-bar'">
+            <button type="submit" class="button button-stable button-block">Submit</button>
+        </div>
+
+    </ion-footer-bar>
+
+</form>
+</ion-view>
+
+
+
+

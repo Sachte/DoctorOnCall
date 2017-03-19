@@ -1,0 +1,26 @@
+﻿<div class="card">
+
+    <div class="item item-divider">
+         Billing Information
+    </div>
+
+
+
+    <label class="item item-input validated " ng-class="{ 'has-errors' : newCarpool.BillingStartDate.$invalid, 'no-errors' : newCarpool.BillingStartDate.$valid}">
+        <span class="input-label">Billing Start Date</span>
+        <input ng-disabled="true"  name="BillingStartDate" type="date" placeholder="1/1/2016" ng-model="carpool.BillingStartDate" required="required">
+
+    </label>
+    <div class="error-container" ng-show=" newCarpool.BillingStartDate.$error" ng-messages="newCarpool.BillingStartDate.$error" ng-if='newCarpool.BillingStartDate.$dirty' > <div ng-messages-include="error-list.html"> </div> </div>
+
+    <div class="item item-divider">
+        Billing Frequency
+    </div>
+    <ion-radio ng-repeat="item in data.billingFrequencies"
+               ng-value="item.BillingFrequency"
+               ng-model="carpool.BillingFrequency">
+        {{ item.BillingFrequency }}
+    </ion-radio>
+
+
+</div>

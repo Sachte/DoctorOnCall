@@ -1,0 +1,73 @@
+﻿<ion-view hide-back-button="true"  cache-view="false" title='<img class="title-image" src="img/icon-40.png" />' >
+  
+   
+       
+        <ion-content  >
+            <div class="card">
+              <div class="item item-divider">Patient Queues</div>
+
+           
+                <div class="button-bar">
+                    <button class="button button-small" type="button" ng-class="showAppointments?'button-positive':'button-normal'" ng-click="showSection('appointments')">
+                        Apptmnt- {{EncounterRequestsAppointments.length}}
+                    </button>
+                    <button class="button button-small" type="button" ng-class="showWalkins?'button-positive':'button-normal'" ng-click="showSection('walkins')">
+                        Walk-in's - {{EncounterRequestsWalkins.length}}
+                    </button>
+                    <button class="button button-small" type="button" ng-class="showPool?'button-positive':'button-normal'"  ng-click="showSection('pool')">
+                       Others - {{EncounterRequestsPool.length}}
+                    </button>
+                </div>
+                 <div class="spacer"></div>
+                <div ng-if="showAppointments">
+                         <ion-item class="item item-text-wrap" ng-repeat="er in EncounterRequestsAppointments" ng-click="goToVideoCall(er)">
+
+                        
+                        <h2>{{er.Subscriber.FirstName + ' ' + er.Subscriber.LastName }}</h2>
+                        <p class="item-text-wrap"> <b>Mobile # :</b> {{er.Subscriber.MobileNumber}}</p>
+                          <p><b>Address :</b> {{er.Subscriber.HomeLocation.formatted_address}} </p>
+                        <div class="item-icon-right">
+                            <i class="icon ion-ios-videocam"></i>
+                        </div>
+                    </ion-item>
+                </div>
+
+                 <div ng-if="showWalkins">
+                         <ion-item class="item item-text-wrap" ng-repeat="er in EncounterRequestsWalkins" ng-click="goToVideoCall(er)">
+
+                        
+                        <h2>{{er.Subscriber.FirstName + ' ' + er.Subscriber.LastName }}</h2>
+                        <p class="item-text-wrap"> <b>Mobile # :</b> {{er.Subscriber.MobileNumber}}</p>
+                          <p><b>Address :</b> {{er.Subscriber.HomeLocation.formatted_address}} </p>
+                        <div class="item-icon-right">
+                            <i class="icon ion-ios-videocam"></i>
+                        </div>
+                    </ion-item>
+                </div>
+
+                <div ng-if="showPool">
+                        <ion-item class="item item-text-wrap" ng-repeat="er in EncounterRequestsPool" ng-click="goToVideoCall(er)">
+
+                        
+                        <h2>{{er.Subscriber.FirstName + ' ' + er.Subscriber.LastName }}</h2>
+                        <p class="item-text-wrap"> <b>Mobile # :</b> {{er.Subscriber.MobileNumber}}</p>
+                          <p><b>Address :</b> {{er.Subscriber.HomeLocation.formatted_address}} </p>
+                        <div class="item-icon-right">
+                            <i class="icon ion-ios-videocam"></i>
+                        </div>
+                    </ion-item>
+                </div>
+              
+            </div>
+                
+                
+
+
+
+                  
+
+          
+        </ion-content>
+            
+  
+</ion-view>

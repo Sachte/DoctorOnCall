@@ -1,0 +1,142 @@
+<ion-view cache-view="false"  title='<img class="title-image" src="img/icon-40.png" />' name="tab-dash">
+    
+
+        <ion-nav-buttons side="right" >
+            <button class="button button-icon button-clear ion-navicon" ng-click="showMenu()"></button>
+        </ion-nav-buttons>
+   
+    <ion-content class="padding">
+       
+        <div class="item item-divider">My Carpools</div>
+            <div class="item item-body">
+                <form name="dashForm">
+                    <label class="item item-input">
+                        <span class="input-label">Date</span>
+                      <!-- <input type="date" ng-model="data.ridedate" placeholder=""  ng-change="refreshdata()"/>--> 
+                        <ionic-datepicker input-obj="datepickerObject">
+                            <button class="button button-block button-positive"> {{datepickerObject.inputDate | date:datepickerObject.dateFormat}}</button>
+                        </ionic-datepicker>
+                    </label>
+                    <label class="item item-input-inset" ng-class="{ 'has-errors' : dashForm.rideList.$invalid, 'no-errors' : dashForm.rideList.$valid}">
+                        <span class="input-label">Select Ride</span>
+
+                        <!-- <select ng-disabled="data.mode=='search'" ng-change="updateWorkBoundDriver()" ng-model="data.workBoundDriver" ng-options="passenger.DisplayName for passenger in drivers=(workBoundRide.RidePassengers| filter: isActiveDriver) "></select> -->
+                        <input ion-autocomplete name="rideList"  type="text" items-clicked-method="RideCarpoolSelected(callback)" ng-model="data.selectedRide" items-method="memberRides" item-view-value-key="Name" autocomplete="off" max-selected-items="1" required select-items-label="Select the Ride/Carpool..." selected-items-label="Selected Ride/Carpool:" />
+                        <i class="icon ion-arrow-down-b "></i>
+                    </label>
+                   <!--  <label class="item item-select" name="Carpool Selector">
+                        <span class="input-label">Select Carpool</span>
+                        <select ng-model="data.selectedRide" ng-options="memberride.Name for memberride in memberRides" ng-change="setETAJoinStatus(data.selectedRide)"></select>
+                    </label>
+                     <label class="item item-input">
+                          <span class="input-label">ETA</span>
+                          <ionic-timepicker etime="slots.epochTime" format="slots.format" step="slots.step" callback="timePickerCallback">
+
+                              <button type="button" class="button button-block button-positive"> <standard-time-meridian etime='slots.epochTime'></standard-time-meridian> </button>
+                          </ionic-timepicker>
+                      </label>
+                        -->
+
+                    <div class="row row-center">
+                        <div class="col">
+                            <div class="card">
+                                <div class="item-divider"> Workbound</div>
+                                <!-- <label class="item item-input item-stacked-label">
+                                      <span class="input-label">ETA</span>-->
+                                <ion-toggle ng-model="data.workBoundJoinFlag" toggle-class="toggle-calm" ng-checked="data.workBoundJoinFlag">Join?</ion-toggle>
+
+                                <ionic-timepicker input-obj="slots">
+
+                                    <button type="button" class="button button-block button-positive"> @<standard-time-meridian etime='slots.inputEpochTime'></standard-time-meridian> </button>
+                                </ionic-timepicker>
+                                <!--   </label> -->
+
+                                   </div>
+                        </div>
+                        <div class="col">
+                            <div class="card">
+                                <div class="item-divider"> Homebound</div>
+                                <!--   <label class="item item-input item-stacked-label">
+                                        <span class="input-label">ETD</span>-->
+                                <ion-toggle ng-model="data.homeBoundJoinFlag " toggle-class="toggle-calm" ng-checked="data.homeBoundJoinFlag ">Join?</ion-toggle>
+
+                                <ionic-timepicker input-obj="slotsHomebound">
+
+                                    <button type="button" class="button button-block button-positive"> @<standard-time-meridian etime='slotsHomebound.inputEpochTime'></standard-time-meridian> </button>
+                                </ionic-timepicker>
+                                <!--   </label>-->
+                                     </div>
+                        </div>
+                    </div>
+                    <div class="row row-center">
+                        <div class="button-bar">
+                            <button class="button button-stable button-block" ng-click="gotoJoinETA('true')">Update Join Status</button>
+                            <button class="button button-stable button-block" ng-click="gotodriverrideusage()">Record Attendance</button>
+                        </div>
+                    </div>
+
+                    <!--
+                                        <div class="row row-center">
+
+                                            <div class="col">Workbound</div>
+                                            <div class="col">Homebound</div>
+                                        </div>
+
+                                        <div class="row row-center">
+
+                                            <div class="col">
+
+                                                <ion-toggle ng-model="carpool.Monday" toggle-class="toggle-calm" ng-checked="carpool.Monday">Joining?</ion-toggle>
+
+                                            </div>
+                                            <div class="col">
+                                                <ion-toggle ng-model="carpool.Tuesday" toggle-class="toggle-calm" ng-checked="carpool.Tuesday">Joining?</ion-toggle>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row row-center">
+
+                                            <div class="col">
+                                                <label class="item item-input">
+                                                    <span class="input-label">ETA</span>
+                                                    <ionic-timepicker etime="slots.epochTime" format="slots.format" step="slots.step" callback="timePickerCallback">
+
+                                                        <button type="button" class="button button-block button-positive"> <standard-time-meridian etime='slots.epochTime'></standard-time-meridian> </button>
+                                                    </ionic-timepicker>
+                                                </label>
+                                            </div>
+                                            <div class="col">
+                                                <label class="item item-input">
+                                                    <span class="input-label">ETD</span>
+                                                    <ionic-timepicker etime="slots.epochTime" format="slots.format" step="slots.step" callback="timePickerCallback">
+
+                                                        <button type="button" class="button button-block button-positive"> <standard-time-meridian etime='slots.epochTime'></standard-time-meridian> </button>
+                                                    </ionic-timepicker>
+                                                </label>
+
+                                            </div>
+                                        </div>
+                                        <div class="row row-center">
+                                            <div class="col">
+                                                <button class="button button-stable button-block" ng-click="gotoJoinETA('true')">Update Join Status</button>
+                                            </div>
+                                        </div>
+                    -->
+                    <!--
+                        <div class="button-bar">
+                            <button class="button button-stable button-block" ng-click="gotoJoinETA('true')">Update Join Status</button>
+                            <button class="button button-stable button-block" ng-click="gotodriverrideusage()">Record Attendance</button>
+                        </div>
+                     -->
+                    <!--
+                    <div class="button-bar">
+
+                        <button class="button button-stable button-block" ng-click="gotocarpoolmap()">Start Ride</button>
+                     </div>
+                    -->
+                </form>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

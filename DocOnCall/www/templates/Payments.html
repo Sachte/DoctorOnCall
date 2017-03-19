@@ -1,0 +1,87 @@
+﻿<ion-view cache-view="false" view-title="Credit Card">
+    <form name="paymentsForm" novalidate="" ng-submit="savePayments(paymentsForm)">
+        <ion-content has-header="true" padding="true">
+              
+            
+              <div class="card">
+                <div class="item item-divider">
+                   Add Credit Card 
+                </div>
+                  <p ng-show="onFileCard.exists">
+                      You have a <b> {{onFileCard.brand}}</b> card ending with <b> {{onFileCard.last4}} </b> on our files. The expiration date is <b> {{onFileCard.exp_month}} / {{onFileCard.exp_year}} </b>. Please add a new card if you want to change the card on our file.
+                  </p>
+
+                  <label class="item item-input validated" ng-class="{ 'has-errors' : paymentsForm.cardFirstName.$invalid, 'no-errors' : paymentsForm.cardFirstName.$valid}">
+                      <span class="input-label">First Name</span>
+                      <input name="cardFirstName" type="text" placeholder="John" ng-model="card.firstname"  required>
+                  </label>
+                  <div class="spacer"></div>
+                  <div class="error-container" ng-show=" paymentsForm.cardFirstName.$error" ng-messages="paymentsForm.cardFirstName.$error" ng-if='paymentsForm.cardFirstName.$dirty'> <div ng-messages-include="error-list.html"> </div> </div>
+                  <div class="spacer"></div>
+
+                  <label class="item item-input validated" ng-class="{ 'has-errors' : paymentsForm.cardLastName.$invalid, 'no-errors' : paymentsForm.cardLastName.$valid}">
+                      <span class="input-label">Last Name</span>
+                      <input name="cardLastName" type="text" placeholder="Smith" ng-model="card.lastname"  required>
+                  </label>
+                  <div class="spacer"></div>
+                  <div class="error-container" ng-show=" paymentsForm.cardLastName.$error" ng-messages="paymentsForm.cardLastName.$error" ng-if='paymentsForm.cardLastName.$dirty'> <div ng-messages-include="error-list.html"> </div> </div>
+                  <div class="spacer"></div>
+
+                  <label class="item item-input validated " ng-class="{ 'has-errors' : paymentsForm.BillingAddress.$invalid, 'no-errors' : paymentsForm.BillingAddress.$valid}">
+                      <span class="input-label">Billing Address</span>
+                      <ion-google-place ng-disabled="data.mode=='search'" name="BillingAddress" ng-displayaddress="card.address.formatted_address" placeholder="Enter Billing Address" ng-model="card.address" required />
+                  </label>
+                  <div class="error-container" ng-show="paymentsForm.BillingAddress.$error" ng-messages="paymentsForm.BillingAddress.$error" ng-if='paymentsForm.BillingAddress.$dirty'> <div ng-messages-include="error-list.html"> </div> </div>
+
+
+
+
+                <label class="item item-input validated" ng-class="{ 'has-errors' : paymentsForm.cardNumber.$invalid, 'no-errors' : paymentsForm.cardNumber.$valid}">
+                    <span class="input-label">Card Number</span>
+                    <input name="cardNumber" type="text" placeholder="l" ng-model="card.number" cc-number cc-eager-type required>
+                </label>
+                <div class="spacer"></div>
+                <p ng-show="paymentsForm.cardNumber.$invalid && paymentsForm.cardNumber.$ccEagerType">
+
+                    <font class="error" > Looks like you're typing a {{paymentsForm.cardNumber.$ccEagerType}} number!</font>
+                </p>
+                <div class="spacer"></div>
+                <p ng-show="paymentsForm.cardNumber.$valid">
+                    <font class="error">  Yes, that looks like a valid {{paymentsForm.cardNumber.$ccType}} number! </font>
+                </p>
+                <div class="error-container" ng-show=" paymentsForm.cardNumber.$error" ng-messages="paymentsForm.cardNumber.$error" ng-if='paymentsForm.cardNumber.$dirty'> <div ng-messages-include="error-list.html"> </div> </div>
+                <div class="spacer"></div>
+
+                <label class="item item-input validated" ng-class="{ 'has-errors' : paymentsForm.expMonth.$invalid, 'no-errors' : paymentsForm.expMonth.$valid}">
+                    <span class="input-label">Exp Month</span>
+                    <input name="expMonth" type="text" placeholder="l" ng-model="card.exp_month" cc-exp-month required>
+                </label>
+
+                <div class="error-container" ng-show=" paymentsForm.expMonth.$error" ng-messages="paymentsForm.expMonth.$error" ng-if='paymentsForm.expMonth.$dirty'> <div ng-messages-include="error-list.html"> </div> </div>
+                <div class="spacer"></div>
+
+                <label class="item item-input validated" ng-class="{ 'has-errors' : paymentsForm.expYear.$invalid, 'no-errors' : paymentsForm.expYear.$valid}">
+                    <span class="input-label">Exp Year</span>
+                    <input name="expYear" type="text" placeholder="l" ng-model="card.exp_year" cc-exp-year required>
+                </label>
+
+                <div class="error-container" ng-show=" paymentsForm.expYear.$error" ng-messages="paymentsForm.cvv.$error" ng-if='paymentsForm.expYear.$dirty'> <div ng-messages-include="error-list.html"> </div> </div>
+                <div class="spacer"></div>
+               <!--
+                <label class="item item-input validated" ng-class="{ 'has-errors' : paymentsForm.cvc.$invalid, 'no-errors' : paymentsForm.cvc.$valid}">
+                    <span class="input-label">CVC</span>
+                    <input name="cvc" type="text" placeholder="l" ng-model="card.cvc" cc-cvc required>
+                </label>
+
+                <div class="error-container" ng-show=" paymentsForm.cvc.$error" ng-messages="paymentsForm.cvc.$error" ng-if='paymentsForm.cvc.$dirty'> <div ng-messages-include="error-list.html"> </div> </div>
+                <div class="spacer"></div>
+                -->
+                <div class="button-bar-inline">
+                    <button type="submit" ng-disabled="paymentsForm.$invalid" class="button button-stable button-block">Submit</button>
+                </div>
+
+            </div>
+
+        </ion-content>
+    </form>
+</ion-view>

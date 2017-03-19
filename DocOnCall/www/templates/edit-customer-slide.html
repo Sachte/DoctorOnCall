@@ -1,0 +1,325 @@
+﻿<ion-view title="Personal Info" >
+
+    <ion-content>
+
+        <tab-slide-box tab="0">
+            <div class="tsb-icons">
+                <div class="tsb-ic-wrp">
+                    <a>1</a>
+                    <a>2</a>
+                    <a>3</a>
+                    <a>4</a>
+
+                </div>
+            </div>
+            <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
+
+                <ion-slide>
+                    <form name="registerSlideCustomer" novalidate="" ng-submit="customerSave(detailcustomer)">
+                        <ion-content ng-class="{ isBrowserView : isBrowser== true }">
+                            <div class="list card">
+                                <div class="item item-divider">Step 1 of 4</div>
+
+                                <h4>Enter a few Details about You</h4>
+
+                                <label class="item item-input validated" ng-class="{ 'has-errors' : registerSlideCustomer.firstName.$invalid, 'no-errors' : registerSlideCustomer.firstName.$valid}">
+                                    <span class="input-label">First Name</span>
+                                    <input ng-disabled="false" name="firstName" type="text" placeholder="Enter First Name" ng-model="customer.FirstName" required>
+                                </label>
+                                <div class="error-container" ng-show=" registerSlideCustomer.firstName.$error" ng-messages="registerSlideCustomer.firstName.$error" ng-if='registerSlideCustomer.firstName.$dirty'> <div> <div ng-messages-include="error-list.html"> </div> </div> </div>
+                                <div class="spacer"></div>
+
+                                <label class="item item-input validated" ng-class="{ 'has-errors' : registerSlideCustomer.lastName.$invalid, 'no-errors' : registerSlideCustomer.lastName.$valid}">
+                                    <span class="input-label">Last Name</span>
+                                    <input ng-disabled="false" name="lastName" type="text" placeholder="Enter Last Name" ng-model="customer.LastName" required>
+                                </label>
+                                <div class="spacer"></div>
+                                <div class="error-container" ng-show=" registerSlideCustomer.lastName.$error" ng-messages="registerSlideCustomer.lastName.$error" ng-if='registerSlideCustomer.lastName.$dirty'> <div> <div ng-messages-include="error-list.html"> </div> </div> </div>
+
+<!--
+                                <label class="item item-input validated " ng-class="{ 'has-errors' : registerSlideCustomer.HomeLocation.$invalid, 'no-errors' : registerSlideCustomer.HomeLocation.$valid}">
+                                    <span class="input-label">Home Location</span>
+                                    <ion-google-place ng-change="calculateDistance('homeChanged')" ng-disabled="false" name="HomeLocation" ng-displayaddress="customer.HomeLocation.formatted_address" placeholder="Enter Home Address" ng-model="customer.HomeLocation" required />
+                                </label>
+                                <div class="spacer"></div>
+                                <div class="error-container" ng-show="registerSlideCustomer.HomeLocation.$error" ng-messages="registerSlideCustomer.HomeLocation.$error" ng-if='registerSlideCustomer.HomeLocation.$dirty'> <div ng-messages-include="error-list.html"> </div> </div>
+-->
+
+                                <!--
+                                <label class="item item-select item-stacked-label validated" name="Address Selector">
+                                    <span class="input-label">Select work location</span>
+                                    <select ng-model="customer.EndLocation" ng-options="location.formatted_address for location in customer.customerOrganization.OrganizationLocation"></select>
+                                </label>
+
+                                <div class="text-center"> <b>OR</b></div>
+                                    -->
+                                
+                                    
+                                    <div class="spacer"></div>  
+                                    <label class="item item-input validated" ng-class="{ 'has-errors' : registerSlideCustomer.ProviderLicense.$invalid, 'no-errors' : registerSlideCustomer.ProviderLicense.$valid}">
+                                        <span class="input-label">License Number</span>
+                                        <input ng-disabled="false" name="ProviderLicense" type="text" placeholder="Enter License Number" ng-model="customer.ProviderLicense" required>
+                                    </label>          
+                                    <div class="error-container" ng-show=" registerSlideCustomer.ProviderLicense.$error" ng-messages="registerSlideCustomer.ProviderLicense.$error" ng-if='registerSlideCustomer.ProviderLicense.$dirty'> <div> <div ng-messages-include="error-list.html"> </div> </div> </div>
+                                    <div class="spacer"></div>
+
+                                    <label class="item item-input validated" ng-class="{ 'has-errors' : registerSlideCustomer.ProviderAppointmentDuration.$invalid, 'no-errors' : registerSlideCustomer.ProviderAppointmentDuration.$valid}">
+                                        <span class="input-label">Default Encounter Duration</span>
+                                        <input ng-disabled="false" name="ProviderAppointmentDuration" type="text" placeholder="Enter Encounter Duration" ng-model="customer.ProviderAppointmentDuration" required>
+                                    </label>
+                                   
+
+
+                                
+                               <label class="item item-input validated " ng-class="{ 'has-errors' : registerSlideCustomer.HomeLocation.$invalid, 'no-errors' : registerSlideCustomer.HomeLocation.$valid}">
+                                    <span class="input-label">Home Location</span>
+                                    <ion-google-place ng-disabled="false"  name="HomeLocation" ng-displayaddress="customer.HomeLocation.formatted_address" placeholder="Enter new home location" ng-model="customer.HomeLocation" required />
+                                </label>
+                                <div class="spacer"></div>
+                                <div class="error-container" ng-show="registerSlideCustomer.HomeLocation.$error" ng-messages="registerSlideCustomer.HomeLocation.$error" ng-if='registerSlideCustomer.HomeLocation.$dirty'> <div ng-messages-include="error-list.html"> </div> </div>
+                                <div class="spacer"></div>
+
+
+
+                                <label class="item item-input validated " ng-class="{ 'has-errors' : registerSlideCustomer.EndLocation.$invalid, 'no-errors' : registerSlideCustomer.EndLocation.$valid}">
+                                    <span class="input-label">Work Location</span>
+                                    <ion-google-place ng-disabled="false" ng-change="calculateDistance('workChanged')" name="EndLocation" ng-displayaddress="customer.EndLocation.formatted_address" placeholder="Enter new work location" ng-model="customer.EndLocation" required />
+                                </label>
+                                <div class="spacer"></div>
+                                <div class="error-container" ng-show="registerSlideCustomer.EndLocation.$error" ng-messages="registerSlideCustomer.EndLocation.$error" ng-if='registerSlideCustomer.EndLocation.$dirty'> <div ng-messages-include="error-list.html"> </div> </div>
+                                <div class="spacer"></div>
+
+                                <label class="item item-input validated" ng-class="{ 'has-errors' : registerSlideCustomer.CostPerRide.$invalid, 'no-errors' : registerSlideCustomer.CostPerRide.$valid}">
+                                    <span class="input-label">Cost Per Encounter (USD)</span>
+                                    <input ng-disabled="false" ng-change="calculateFees()" name="CostPerRide" type="number"  min="0" max="100" placeholder="12.00" ng-model="customer.CostPerRide" required>
+                                </label>
+                                <div class="spacer"></div>
+                                <div class="error-container" ng-show="registerSlideCustomer.CostPerRide.$error" ng-messages="registerSlideCustomer.CostPerRide.$error" ng-if='registerSlideCustomer.CostPerRide.$dirty'> <div> <div ng-messages-include="error-list.html"> </div> </div> </div>
+
+                                <label class="item item-text-wrap ">
+                                    <span ng-if="customer.CostPerRide>0">Your patient will be charged a total of <b>${{customer.TotalCostPerRide}}</b> and this includes a platform fee of <b> ${{customer.PlatformFeePerRide}}</b></span>
+
+                                </label>
+
+
+                                <div class="button-bar-inline">
+                                    <button type="submit" ng-disabled="registerSlideCustomer.$invalid" class="button button-positive button-block">Save My Info</button>
+                                </div>
+
+                               
+                            </div>
+
+                        </ion-content>
+                    </form>
+                    <!--   <ion-footer-bar class="item-input-inset">
+
+                        <div class="button-bar">
+                            <button type="button" ng-click="customerSave(detailCustomer)" class="button button-positive button-block">Save My Info</button>
+                        </div>
+
+                    </ion-footer-bar>
+                    -->
+                </ion-slide>
+
+                <ion-slide>
+                    <ion-content ng-class="{ isBrowserView : isBrowser== true }">
+                        <div class="card">
+
+                            <div class="item item-divider">
+                                Step 2 of 4
+                            </div>
+                            <h4>Enter your  Schedule</h4>
+
+                            <div class="row row-center">
+                                <div class="col"></div>
+                                <div class="col">Start Time</div>
+                                <div class="col">End Time</div>
+                            </div>
+                            <div class="row row-center">
+                                <div class="col">Morning</div>
+                                <div class="col">
+                                    <ionic-timepicker input-obj="slotsWorkboundDeparture">
+
+                                        <button type="button" class="button button-block button-positive"> <standard-time-meridian etime='Schedule.WorkboundDepartureTime'></standard-time-meridian> </button>
+                                    </ionic-timepicker>
+                                </div>
+                                <div class="col">
+                                    <ionic-timepicker input-obj="slotsWorkboundArrival">
+
+                                        <button type="button" class="button button-block button-positive"> <standard-time-meridian etime='Schedule.WorkboundArrivalTime'></standard-time-meridian> </button>
+                                    </ionic-timepicker>
+                                </div>
+                            </div>
+                            <div class="row row-center">
+                                <div class="col">Afternoon</div>
+                                <div class="col">
+                                    <ionic-timepicker input-obj="slotsHomeboundDeparture">
+
+                                        <button type="button" class="button button-block button-positive"> <standard-time-meridian etime='Schedule.HomeboundDepartureTime'></standard-time-meridian> </button>
+                                    </ionic-timepicker>
+                                </div>
+                                <div class="col">
+                                    <ionic-timepicker input-obj="slotsHomeboundArrival">
+
+                                        <button type="button" class="button button-block button-positive"> <standard-time-meridian etime='Schedule.HomeboundArrivalTime'></standard-time-meridian> </button>
+                                    </ionic-timepicker>
+
+                                </div>
+                            </div>
+
+                            <div class="button-bar-inline">
+                                <button type="button" ng-click="customerSave(detailCustomer)" class="button button-positive button-block">Save My Schedule</button>
+                            </div>
+                        </div>
+
+                    </ion-content>
+                    <!--   <ion-footer-bar class="item-input-inset">
+
+                        <div class="button-bar">
+                            <button type="button" ng-click="customerSave(detailCustomer)" class="button button-positive button-block">Save My Schedule</button>
+                        </div>
+
+                    </ion-footer-bar>
+                     -->
+                </ion-slide>
+
+                <ion-slide>
+
+                    <ion-content ng-class="{ isBrowserView : isBrowser== true }">
+                        <div class="list card">
+                            <div class="item item-divider">
+                                Step 3 of 4
+                            </div>
+                            <h4> Enter the days of week that you can see patients</h4>
+
+                            <div class="list">
+
+                                <div class="row row row-center">
+                                    <div class="col">
+                                        <ion-toggle ng-model="Schedule.Sunday" toggle-class="toggle-calm" ng-checked="Schedule.Sunday">Sun</ion-toggle>
+                                    </div>
+                                    <div class="col">
+                                        <ion-toggle ng-model="Schedule.Monday" toggle-class="toggle-calm" ng-checked="Schedule.Monday">Mon</ion-toggle>
+                                    </div>
+                                </div>
+                                <div class="row row row-center">
+                                    <div class="col">
+                                        <ion-toggle ng-model="Schedule.Tuesday" toggle-class="toggle-calm" ng-checked="Schedule.Tuesday">Tue</ion-toggle>
+
+                                    </div>
+                                    <div class="col">
+                                        <ion-toggle ng-model="Schedule.Wednesday" toggle-class="toggle-calm" ng-checked="Schedule.Wednesday">Wed</ion-toggle>
+
+                                    </div>
+                                </div>
+                                <div class="row row row-center">
+                                    <div class="col">
+                                        <ion-toggle ng-model="Schedule.Thursday" toggle-class="toggle-calm" ng-checked="Schedule.Thursday">Thu</ion-toggle>
+
+                                    </div>
+                                    <div class="col">
+                                        <ion-toggle ng-model="Schedule.Friday" toggle-class="toggle-calm" ng-checked="Schedule.Thursday">Fri</ion-toggle>
+
+                                    </div>
+                                </div>
+                                <div class="row row row-center">
+                                    <div class="col col-center">
+                                        <ion-toggle ng-model="Schedule.Saturday" toggle-class="toggle-calm" ng-checked="Schedule.Saturday">Sat</ion-toggle>
+
+                                    </div>
+                                    <div class="col col-center">
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="button-bar-inline">
+                                <button type="button" ng-click="customerSave(detailCustomer)" class="button button-positive button-block">Save My Schedule</button>
+
+                            </div>
+                        </div>
+
+                    </ion-content>
+                    <!--  <ion-footer-bar class="item-input-inset">
+
+                        <div class="button-bar">
+                            <button type="button" ng-click="customerSave(detailCustomer)" class="button button-positive button-block">Save My Schedule</button>
+
+                        </div>
+
+                    </ion-footer-bar>
+                      -->
+                </ion-slide>
+
+                <ion-slide>
+                    <ion-content ng-class="{ isBrowserView : isBrowser== true }">
+                        <div class="list card">
+                            <div class="item item-divider">
+                                Step 4 of 4
+                            </div>
+                            <h4> Invite Patients</h4>
+                            <table>
+                                <tr>
+
+                                    <td valign="bottom">
+
+                                        <button type="button" class="button button-icon icon ion-ios-minus-outline"
+                                                ng-click="data.showDelete = !data.showDelete;"></button>
+
+                                    </td>
+                                    <td valign="bottom">
+                                        <button type="button" class="button button-icon icon ion-ios-plus-outline" ng-click="pickContact()"> </button>
+
+                                    </td>
+                                    <td valign="middle">
+
+                                        <h4> Patients</h4>
+                                    </td>
+
+                                </tr>
+                            </table>
+                            <ion-list show-delete="data.showDelete">
+
+                                <ion-item class="item item-thumbnail-left" ng-repeat="contact in data.selectedContacts">
+                                    <img src="{{contact.Photo}}" ng-if="contact.Photo != undefined ">
+                                    <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Silver_-_replace_this_image_male.svg/200px-Silver_-_replace_this_image_male.svg.png" ng-if="contact.Photo === undefined">
+                                    <h2>{{contact.DisplayName}}</h2>
+                                    <p ng-if="contact.Email != undefined">Email : {{contact.Email}}</p>
+                                    <p ng-if="contact.MobileNumber != undefined">Mobile Number : {{contact.MobileNumber}}</p>
+                                    <ion-delete-button type="button" class="ion-minus-circled"
+                                                       ng-click="onContactDelete(contact)">
+                                    </ion-delete-button>
+
+                                </ion-item>
+
+                            </ion-list>
+
+
+                            <div class="button-bar-inline">
+                                <button type="button" ng-click="customersaveandgo(detailCustomer)" class="button button-positive button-block">Save My Patients!</button>
+                            </div>
+                        </div>
+
+
+
+                    </ion-content>
+                    <!--  <ion-footer-bar class="item-input-inset">
+
+                        <div class="button-bar">
+                            <button type="button" ng-click="customerSave(detailCustomer)" class="button button-positive button-block">Save My Buddies!</button>
+                        </div>
+
+                    </ion-footer-bar>
+                      -->
+                </ion-slide>
+
+
+            </ion-slide-box>
+        </tab-slide-box>
+        <!--  </ion-slide-box>-->
+
+    </ion-content>
+
+
+</ion-view>

@@ -1,0 +1,42 @@
+﻿
+<div class="card">
+
+
+    <div class="item item-divider">
+        Select Carpool Type
+    </div>
+    <label class="item item-input " >
+        <table>
+            <tr>
+                <td>
+                    <label class="item item-radio">
+                        <input type="radio" name="carpoolType" ng-model="carpool.Type" value="vanPool" ng-change="updateChoice(carpool.Type)"  />
+
+
+                        <div class="item item-text-wrap">
+                            Vanpool/Buspool - Rental fees and Gas expenses are shared among members. stand by riders pay a fixed cost per day of travel
+                        </div>
+
+                        <i class="radio-icon ion-checkmark"></i>
+
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="item item-radio">
+                        <input type="radio" name="carpoolType" ng-model="carpool.Type" value="carPool" ng-change="updateChoice(carpool.Type)" >
+
+                        <div class="item item-text-wrap">
+                            Carpool - Members drive their own cars. co-passengers pay a fix cost per day of travel.
+                        </div>
+
+                        <i class="radio-icon ion-checkmark"></i>
+
+                    </label>
+                </td>
+            </tr>
+        </table>
+    </label>
+    
+</div>   

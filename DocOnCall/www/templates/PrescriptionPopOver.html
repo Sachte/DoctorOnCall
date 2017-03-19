@@ -1,0 +1,32 @@
+   <ion-popover-view style="width:95%;" >
+                
+               <div class="button-bar">
+                     <a class="button"  ng-click="closePopover()">Rx Close</a>
+                     
+                  </div>
+               
+                 
+                 
+                 <div >
+               
+                     <div ng-show="data.handWritePrescription">
+                       <canvas id='prescriptionCanvas' width='900' height='180' style='border: 1px solid black;'></canvas>                
+                     </div>
+                     <div ng-hide="data.handWritePrescription" style ="border:1px solid black">
+                      <textarea  rows=10 class="text-fill" ng-model="Prescription.prescriptionText" placeholder="Enter the prescription"></textarea>
+                     </div>
+                     <div>
+                         <ion-toggle ng-model="data.handWritePrescription" ng-click="togglePrescriptionMode()" toggle-class="toggle-calm" ng-checked="data.handWritePrescription">Write </ion-toggle>
+                         <label class="item item-input">
+                             <span class="input-label">Refills:</span>
+                             <input id="refill" name="refills" placeholder="Enter Refills" type="number" ng-model="Prescription.refills" />
+
+                         </label>
+                        
+                     </div>  
+                       
+                    <div class="button-bar">
+                        <a class="button" ng-click="prescriptionSave()">Save Prescription</a>
+                    </div>
+                 </div>
+ </ion-popover-view>

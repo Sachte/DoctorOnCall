@@ -1,0 +1,49 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view title="Carpool Details">
+        
+        <ion-nav-buttons side="right">
+            <!--<button class="button button-icon icon ion-plus-round" ng-click="gotonewcarpool()"></button>-->
+            <button ng-show="Action=='edit'" class="button button-icon icon ion-navicon" ng-click="showActionsheet()"></button>
+        </ion-nav-buttons>
+   
+    <form name="detailCarpool" novalidate="" ng-submit="carpoolActivate(detailCarpool)">
+        <ion-content has-header="true" padding="true">
+            <div class="left">
+                <button type="button" class="button button-positive button-clear no-animation icon ion-chevron-left"
+                        ng-click="" ng-if="!data.slideIndex"></button>
+                <button type="button" class="button button-positive button-clear no-animation icon ion-chevron-left"
+                        ng-click="previous()" ng-if="data.slideIndex > 0"></button>
+            </div>
+
+
+            <div class="right">
+                <button type="button"  class="button button-positive button-clear no-animation icon ion-chevron-right"
+                        ng-click="next()" ng-if="!data.slideIndex"></button>
+                <button type="button"  class="button button-positive button-clear no-animation icon ion-chevron-right"
+                        ng-click="next()" ng-if="data.slideIndex>0"></button>
+            </div>
+            <ion-slide-box on-slide-changed="slideChanged(index)">
+
+                <ion-slide disable-scroll="false" ng-repeat="slide in data.slides | filter:{viewable : true}">
+                    <ion-scroll style="height:100%">
+                        <div ng-include src="slide.template"></div>
+                    </ion-scroll>
+                </ion-slide>
+
+            </ion-slide-box>
+        </ion-content>
+        <ion-footer-bar class="item-input-inset">
+
+            <div class="button-bar" ng-show="Action=='approve'">
+                <button type="submit" class="button button-stable button-block">Accept Carpool Memership</button>
+            </div>
+
+        </ion-footer-bar>
+
+    </form>
+</ion-view>

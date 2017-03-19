@@ -1,0 +1,52 @@
+<ion-view view-title="Video Encounter" cache-view="false">
+    <ion-content>
+           <div  id="subscriber" class="subscriber-video" >
+                <div>
+                  <div class="button-bar">
+                     
+                  
+                    <a class="button" id="aptbut" ng-click="initiateVideoCall('Appointment')">Get Appointments</a>
+                    <a class="button" id="patbut" ng-click="initiateVideoCall('Walkin')"> Get Patients</a>
+                    <ion-toggle ng-model="data.Pool" toggle-class="toggle-calm" ng-checked="data.Pool">Pool</ion-toggle>
+                
+                  </div>
+                  <div class="button-bar">
+                     <a class="button"  ng-click="prescriptionWrite()">{{data.Prescriptiontext}}</a>
+                     
+                  </div>
+                 </div>
+                  <!-- <canvas id="canvas" width="1000" height="220"></canvas> -->
+                 <!--ng-if="data.showPrescription" -->
+                 
+                 <div ng-show="data.showPrescription">
+              
+                    <div ng-show="data.handWritePrescription">
+                       <canvas id='prescriptionCanvas' width='900' height='180' style='border: 1px solid black;'></canvas>                
+                    </div>
+                    <div ng-hide="data.handWritePrescription" style ="border:1px solid black">
+                    <textarea  rows=10 class="text-fill" ng-model="Prescription.prescriptionText" placeholder="Enter the prescription"></textarea>
+                    </div>
+                     <label class="item item-input">
+                         <ion-toggle ng-model="data.handWritePrescription"  ng-click="togglePrescriptionMode()" toggle-class="toggle-calm" ng-checked="data.handWritePrescription">Write </ion-toggle>
+                         <span class="input-label">Refills:</span>
+                         <input id="refill" name="refills"  placeholder="Enter Refills" type="number" ng-model="Prescription.refills" />
+
+                     </label>
+                         
+                         <div class="button-bar">
+                             <a class="button" ng-click="prescriptionSave()">Save Prescription</a>
+                         </div>
+</div>
+                
+            </div>
+            <div id="publisher" class="publisher-video" >
+                <!--<div ng-hide="data.IsProviderConnected">
+                  <p> Your camera is not accessible. Please close other programs that may be using your camera.  </p>
+                </div>-->
+             </div>
+            
+
+
+    </ion-content>
+</ion-view>
+

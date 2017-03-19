@@ -1,0 +1,126 @@
+<ion-view view-title="Book Appointments">
+    <form name="editCarpool" novalidate="" ng-submit="carpoolSave(editCarpool)">
+
+        <ion-content  ng-class="{ isBrowserView : isBrowser== true }">
+            <!--<tab-slide-box tab="1">
+                <div class="tsb-icons">
+                    <div class="tsb-ic-wrp">
+                           <a href="javascript:;" class="ion-person"></a>
+                           <a href="javascript:;" class="ion-calendar"></a>
+                    </div>
+                </div>
+                <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
+                    <ion-slide >
+                       <h1> hey </h1>
+                    </ion-slide>
+                    <ion-slide >
+                      
+                  <calendar ng-model="calendar.currentDate" calendar-mode="calendar.mode" event-source="calendar.eventSource"
+                        range-changed="reloadSource(startTime, endTime)"
+                        event-selected="onEventSelected(event)" title-changed="onViewTitleChanged(title)"
+                        time-selected="onTimeSelected(selectedTime)" step="15">
+                        </calendar>
+                        
+                    </ion-slide>
+                  
+
+                </ion-slide-box>
+            </tab-slide-box>-->
+             <div class="list card">
+                            <div class="item item-divider">                              
+                                 Provider - {{Provider.FirstName}} {{Provider.LastName}} 
+                            </div>
+                            
+    
+                            <!--<label class="item item-input" ng-class="{ 'has-errors' : Provider.FirstName.$invalid, 'no-errors' : Provider.FirstName.$valid}">
+                                <span class="input-label">Name</span>
+                                <input ng-disabled="data.mode=='search'" name="Name" type="text" placeholder="40" ng-model="Provider.FirstName" required>
+                            </label>-->
+                           
+                              <label class="item item-input" ng-class="{ 'has-errors' : Provider.EndLocation.$invalid, 'no-errors' : Provider.EndLocation.$valid}">
+                                <span class="input-label">Address</span>
+                                <ion-google-place ng-disabled="data.mode=='search'"  name="Address" ng-displayaddress="Provider.EndLocation.formatted_address" placeholder="Address" ng-model="Provider.EndLocation" required />
+                            </label>
+                             <div class="spacer">
+                              </div>  
+
+                   
+ 
+                            <label class="item item-input " ng-disabled  ng-class="{ 'has-errors' : Provider.TotalCostPerRide.$invalid, 'no-errors' : Provider.TotalCostPerRide.$valid}">
+
+                                <span class="input-label">Total Cost</span>
+                                <input ng-disabled="data.mode=='search'" name="TotalCostPerRide" type="number" placeholder="12.00" ng-model="Provider.TotalCostPerRide" required="required">
+
+                            </label>
+                          
+                              
+                              <label class="item  item-input " >
+                                <span class="input-label">
+                                   Appointment  Date
+                                </span>
+                               <!-- <input type="date" name="rideDate" ng-model="data.ridedate" placeholder="" required />-->
+                                <ionic-datepicker input-obj="datepickerObject">
+                                    <button class="button button-block button-positive"> {{datepickerObject.inputDate | date:datepickerObject.dateFormat}}</button>
+                                </ionic-datepicker>
+                            </label>
+                            
+                                <!--<div ng-repeat="item in Appointments" class="row">
+                                    <div class="col"> {{item.startDisplayTime}} - {{item.endDisplayTime}}</div>
+                                    <div class="col"> Book Appointment</div>
+                                </div>-->
+                                
+                                   <ion-list>
+                                        <div class="item item-divider">
+                                           My Appointments
+                                         
+                                        </div>
+                                       <div ng-if="(Appointments| filter: {AppointmentStatus:  'Booked'}).length<=0" class="item item-text-wrap">
+                                           
+                                               You do not have any appointments with  {{Provider.FirstName}} {{Provider.LastName}}  on {{datepickerObject.inputDate | date:datepickerObject.dateFormat}}.
+
+                                          
+                                         
+                                       </div>
+                                       
+                                    <ion-item class="item item-text-wrap" ng-repeat=" item in Appointments| filter: {AppointmentStatus:  'Booked'}"  ng-click="initiateCallorCancelAppointment(item)">
+                                        {{item.startDisplayTime}} - {{item.endDisplayTime}}  
+                                        <div class="buttons">
+                                            <button class="button button-icon button-clear icon " ng-click="initiateCallorCancelAppointment(item,'video')"><i class="icon ion-ios-videocam"> Video Consult</i></button>
+                                            <button class="button button-icon button-clear icon " ng-click="initiateCallorCancelAppointment(item,'cancel')"><i class="icon ion-android-cancel"> Cancel Appntmnt </i></button>
+                                        </div>
+                                    </ion-item>
+                                </ion-list>
+                                  <ion-list>
+                                        <div class="item item-divider">
+                                           Book Appointment                                          
+                                        </div>
+                                      <div ng-if="(Appointments| filter: {AppointmentStatus:  '!'+ 'Booked'}).length<=0" class="item item-text-wrap">
+                                         
+                                              Appointment slots are not available for {{Provider.FirstName}} {{Provider.LastName}}  on {{datepickerObject.inputDate | date:datepickerObject.dateFormat}}. Please select a different date.
+                                          
+                                       </div>
+                                     
+                                       
+                                    <ion-item  class="item item-text-wrap" ng-repeat=" item in Appointments| filter: {AppointmentStatus: '!' + 'Booked'}"  ">
+                                        {{item.startDisplayTime}} - {{item.endDisplayTime}}  
+                                        <div class="buttons">
+                                            <button class="button button-icon button-clear icon " ng-click="bookAppointment(item,'video')"><i class="icon ion-ios-videocam"> Book Video Appntmnt </i></button>
+                                            <button class="button button-icon button-clear " ng-click="bookAppointment(item,'office')"><i class="icon ion-calendar"> Book Office Appntmnt </i></button>
+                                        </div>
+                                    </ion-item>
+                                </ion-list>
+                            </div>
+                            
+                </div> 
+        </ion-content>
+     <!--   <ion-footer-bar class="item-input-inset">
+
+            <div class="button-bar">
+                <button  class="button button-stable button-block" ng-click="initiateCall('Walkin')">Video Encounter</button>
+
+            </div>
+
+        </ion-footer-bar>
+        -->
+    </form>
+</ion-view>

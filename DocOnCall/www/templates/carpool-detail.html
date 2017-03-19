@@ -1,0 +1,250 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view title="Carpool Details">
+        
+        <ion-nav-buttons side="right">
+            <!--<button class="button button-icon icon ion-plus-round" ng-click="gotonewcarpool()"></button>-->
+            <button ng-show="Action=='edit'" class="button button-icon icon ion-navicon" ng-click="showActionsheet()"></button>
+        </ion-nav-buttons>
+   
+    <form name="detailCarpool" novalidate="" ng-submit="carpoolActivate(detailCarpool)">
+        <ion-content has-header="true" padding="true">
+            <div class="card">
+
+
+                <div class="item item-divider">
+                    Select Carpool Type
+                </div>
+                <label class="item item-input validated" ng-class="{'has-errors' : detailCarpool.carpoolType.$invalid, 'no-errors' : detailCarpool.carpoolType.$valid}">
+
+                    <table>
+                        <tr>
+                            <td>
+                                <label class="item item-radio">
+                                    <input ng-disabled="true" type="radio" name="carpoolType" ng-model="carpool.Type" value="vanPool" ng-change="updateChoice(carpool.Type)" required />
+
+
+                                    <div class="item item-text-wrap">
+                                        Vanpool/Buspool - Rental fees and Gas expenses are shared among members. stand by riders pay a fixed cost per day of travel
+                                    </div>
+
+                                    <i class="radio-icon ion-checkmark"></i>
+
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="item item-radio">
+                                    <input ng-disabled="true" type="radio" name="carpoolType" ng-model="carpool.Type" value="carPool" ng-change="updateChoice(carpool.Type)" required>
+
+                                    <div class="item item-text-wrap">
+                                        Carpool - Members drive their own cars. co-passengers pay a fix cost per day of travel.
+                                    </div>
+
+                                    <i class="radio-icon ion-checkmark"></i>
+
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                </label>
+                <div class="error-container" ng-show="detailCarpool.carpoolType.$error" ng-messages="detailCarpool.carpoolType.$error" ng-messages-include="error-list.html">
+                    <div class="error" ng-message="required">
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+
+
+                <div class="item item-divider">
+                    Enter Carpool Details
+                </div>
+
+                <label class="item item-input validated" ng-class="{ 'has-errors' : detailCarpool.carpoolName.$invalid, 'no-errors' : detailCarpool.carpoolName.$valid}">
+                    <span class="input-label">Carpool Name</span>
+                    <input ng-disabled="true" name="carpoolName" type="text" placeholder="Irvine-DIRECTV Carpool" ng-model="carpool.Name" required>
+                </label>
+
+                <div class="error-container" ng-show=" detailCarpool.carpoolName.$error" ng-messages="detailCarpool.carpoolName.$error" ng-if='detailCarpool.carpoolName.$dirty' > <div ng-messages-include="error-list.html"> </div> </div>
+
+
+                <label class="item item-input validated " ng-class="{ 'has-errors' : detailCarpool.StartAddress.$invalid, 'no-errors' : detailCarpool.StartAddress.$valid}">
+                    <span class="input-label">Origin</span>
+                    <ion-google-place ng-disabled="true" name="StartAddress" ng-displayaddress="carpool.StartAddress.formatted_address" placeholder="Enter Start Address" ng-model="carpool.StartAddress" required />
+                </label>
+                <div class="error-container" ng-show=" detailCarpool.StartAddress.$error" ng-messages="detailCarpool.StartAddress.$error" ng-if='detailCarpool.StartAddress.$dirty' > <div ng-messages-include="error-list.html"> </div> </div>
+
+
+
+                <label class="item item-input validated" ng-class="{ 'has-errors' : detailCarpool.EndAddress.$invalid, 'no-errors' : detailCarpool.EndAddress.$valid}">
+                    <span class="input-label">Destination</span>
+                    <ion-google-place ng-disabled="true" name="EndAddress" ng-displayaddress="carpool.EndAddress.formatted_address" placeholder="Enter End Address" ng-model="carpool.EndAddress" required />
+                </label>
+                <div class="error-container" ng-show=" detailCarpool.EndAddress.$error" ng-messages="detailCarpool.EndAddress.$error" ng-if='detailCarpool.EndAddress.$dirty' > <div ng-messages-include="error-list.html"> </div> </div>
+
+                <label class="item item-input validated" ng-class="{ 'has-errors' : detailCarpool.Distance.$invalid, 'no-errors' : detailCarpool.Distance.$valid}">
+                    <span class="input-label">Distance (One Way-In Miles)</span>
+                    <input ng-disabled="true" name="Distance" type="number" placeholder="40" ng-model="carpool.Distance" required>
+                </label>
+                <div class="error-container" ng-show=" detailCarpool.Distance.$error" ng-messages="detailCarpool.Distance.$error" ng-if='detailCarpool.Distance.$dirty' > <div ng-messages-include="error-list.html"> </div> </div>
+                <!--
+                 <div >
+
+                    <ion-toggle ng-model="carpool.TrackReturnRidesSeparately" toggle-class="toggle-calm" ng-checked="carpool.TrackReturnRidesSeparately">Track Return Rides Separately</ion-toggle>
+                </div>
+                -->
+                <label class="item item-input validated" ng-class="{ 'has-errors' : detailCarpool.Capacity.$invalid, 'no-errors' : detailCarpool.Capacity.$valid}">
+                    <span class="input-label">Max Capacity</span>
+                    <input ng-disabled="true" name="Capacity" type="number" placeholder="7" ng-model="carpool.Capacity" required>
+                </label>
+                <div class="error-container" ng-show=" detailCarpool.Capacity.$error" ng-messages="detailCarpool.Capacity.$error" ng-if='detailCarpool.Capacity.$dirty' > <div ng-messages-include="error-list.html"> </div> </div>
+
+                <label class="item item-input validated " ng-class="{ 'has-errors' : detailCarpool.CostPerRide.$invalid, 'no-errors' : detailCarpool.CostPerRide.$valid}">
+
+                    <span class="input-label">Cost Per Ride</span>
+                    <input ng-disabled="true" name="CostPerRide" type="number" placeholder="12.00" ng-model="carpool.CostPerRide" required="required">
+
+                </label>
+                <div class="error-container" ng-show=" detailCarpool.CostPerRide.$error" ng-messages="detailCarpool.CostPerRide.$error" ng-if='detailCarpool.CostPerRide.$dirty' > <div ng-messages-include="error-list.html"> </div> </div>
+
+
+
+
+
+                <div ng-show="selectedType=='vanPool'">
+                    <div class="list">
+                        <label class="item item-input validated " ng-class="{ 'has-errors' : detailCarpool.FixedCost.$invalid, 'no-errors' : detailCarpool.FixedCost.$valid}">
+                            <label class="item item-input">
+                                <span class="input-label">Rental Fee</span>
+                                <input ng-disabled="true" name="FixedCost" type="number" placeholder="68.00" ng-model="carpool.FixedCost" ng-required="selectedType">
+                            </label>
+                        </label>
+                        <div class="error-container" ng-show=" detailCarpool.FixedCost.$error" ng-messages="detailCarpool.FixedCost.$error" ng-if='detailCarpool.FixedCost.$dirty' > <div ng-messages-include="error-list.html"> </div> </div>
+
+                        <label class="item item-input validated " ng-class="{ 'has-errors' : detailCarpool.DriverCredit.$invalid, 'no-errors' : detailCarpool.DriverCredit.$valid}">
+                            <label class="item item-input">
+                                <span class="input-label">Driver Credit</span>
+                                <input ng-disabled="true" name="DriverCredit" type="number" placeholder="5.00" ng-model="carpool.DriverCredit" ng-required="selectedType">
+                            </label>
+                        </label>
+                        <div class="error-container" ng-show=" detailCarpool.DriverCredit.$error" ng-messages="detailCarpool.DriverCredit.$error" ng-if='detailCarpool.DriverCredit.$dirty' > <div ng-messages-include="error-list.html"> </div> </div>
+
+                        <label class="item item-input">
+                            <span class="input-label">Approx. Fuel Costs</span>
+                            <input ng-disabled="true" type="number" placeholder="60.00" ng-model="carpool.ApproximateFuelCosts">
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="item item-divider">
+                    Schedule
+                </div>
+                <div class="item item-calm"> Workbound</div>
+                <label class="item item-input ">
+                    <span class="input-label">Departure Time</span>
+                    <ionic-timepicker etime="carpool.WorkboundDepartureTime" format="slots.format" step="slots.step" callback="timePickerCallback">
+
+                        <button ng-disabled="true" type="button" class="button button-block button-positive"> <standard-time-meridian etime='carpool.WorkboundDepartureTime'></standard-time-meridian> </button>
+                    </ionic-timepicker>
+
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Arrival Time</span>
+                    <ionic-timepicker etime="carpool.WorkboundArrivalTime" format="slots.format" step="slots.step" callback="timePickerCallback">
+
+                        <button ng-disabled="true" type="button" class="button button-block button-positive"> <standard-time-meridian etime='carpool.WorkboundArrivalTime'></standard-time-meridian> </button>
+                    </ionic-timepicker>
+                </label>
+                <div class="item item-calm"> Homebound</div>
+
+                <label class="item item-input ">
+                    <span class="input-label">Departure Time</span>
+                    <ionic-timepicker etime="carpool.HomeboundDepartureTime" format="slots.format" step="slots.step" callback="timePickerCallback">
+
+                        <button ng-disabled="true" type="button" class="button button-block button-positive"> <standard-time-meridian etime='carpool.HomeboundDepartureTime'></standard-time-meridian> </button>
+                    </ionic-timepicker>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Arrival Time</span>
+                    <ionic-timepicker etime="carpool.HomeboundArrivalTime" format="slots.format" step="slots.step" callback="timePickerCallback">
+
+                        <button ng-disabled="true" type="button" class="button button-block button-positive"> <standard-time-meridian etime='carpool.HomeboundArrivalTime'></standard-time-meridian> </button>
+                    </ionic-timepicker>
+                </label>
+                <div class="item item-calm"> Days of Week</div>
+                <div class="list">
+                    <ion-toggle ng-disabled="true" ng-model="carpool.Sunday" toggle-class="toggle-calm" ng-checked="carpool.Sunday">Sunday</ion-toggle>
+                    <ion-toggle ng-disabled="true" ng-model="carpool.Monday" toggle-class="toggle-calm" ng-checked="carpool.Monday">Monday</ion-toggle>
+                    <ion-toggle ng-disabled="true" ng-model="carpool.Tuesday" toggle-class="toggle-calm" ng-checked="carpool.Tuesday">Tuesday</ion-toggle>
+                    <ion-toggle ng-disabled="true" ng-model="carpool.Wednesday" toggle-class="toggle-calm" ng-checked="carpool.Wednesday">Wednesday</ion-toggle>
+                    <ion-toggle ng-disabled="true" ng-model="carpool.Thursday" toggle-class="toggle-calm" ng-checked="carpool.Thursday">Thursday</ion-toggle>
+                    <ion-toggle ng-disabled="true" ng-model="carpool.Friday" toggle-class="toggle-calm" ng-checked="carpool.Thursday">Friday</ion-toggle>
+                    <ion-toggle ng-disabled="true" ng-model="carpool.Saturday" toggle-class="toggle-calm" ng-checked="carpool.Saturday">Saturday</ion-toggle>
+
+                </div>
+            </div>
+            <div class="card">
+
+                <div class="item item-divider">
+                    Enter Billing Information
+                </div>
+
+
+
+                <label class="item item-input validated " ng-class="{ 'has-errors' : detailCarpool.BillingStartDate.$invalid, 'no-errors' : detailCarpool.BillingStartDate.$valid}">
+                    <span class="input-label">Effective Billing Date</span>
+                    <input ng-disabled="true" name="BillingStartDate" type="date" placeholder="1/1/2016" ng-model="carpool.BillingStartDate" required="required">
+
+                </label>
+                <div class="error-container" ng-show=" detailCarpool.BillingStartDate.$error" ng-messages="detailCarpool.BillingStartDate.$error" ng-if='detailCarpool.BillingStartDate.$dirty' > <div ng-messages-include="error-list.html"> </div> </div>
+
+                <label class="item item-input validated " ng-class="{ 'has-errors' : detailCarpool.BillingFrequency.$invalid, 'no-errors' : detailCarpool.BillingFrequency.$valid}">
+                    <span class="input-label">Billing Frequency</span>
+                    <input ng-disabled="true" name="BillingFrequency" type="text" placeholder="1/1/2016" ng-model="carpool.BillingFrequency" required="required">
+
+                </label>
+                <div class="error-container" ng-show=" detailCarpool.BillingFrequency.$error" ng-messages="detailCarpool.BillingFrequency.$error" ng-if='detailCarpool.BillingFrequency.$dirty' > <div ng-messages-include="error-list.html"> </div> </div>
+
+
+            </div>
+            <div class="card">
+                <div class="item item-divider">
+                    <table>
+                        <tr>
+                            <td valign="top">
+                                Carpool Members
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <ion-list can-swipe="true" show-delete="data.showDelete">
+
+                    <ion-item ng-repeat="member in carpool.CarpoolMembers track by $index" item="member">
+
+                        {{member.DisplayName}}-{{member.MobileNumber}}
+
+                    </ion-item>
+
+
+                </ion-list>
+
+            </div>
+        </ion-content>
+        <ion-footer-bar class="item-input-inset">
+
+            <div class="button-bar" ng-show="Action=='approve'">
+                <button type="submit" class="button button-stable button-block">Accept Carpool Memership</button>
+            </div>
+
+        </ion-footer-bar>
+
+    </form>
+</ion-view>

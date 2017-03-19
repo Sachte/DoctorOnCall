@@ -1,0 +1,47 @@
+﻿<div class="list card">
+    <div class="item item-divider">
+        Add contacts who can carpool with you
+    </div>
+   
+    <table>
+        <tr>
+
+            <td valign="bottom">
+
+                <button type="button" class="button button-icon icon ion-ios-minus-outline"
+                        ng-click="data.showDelete = !data.showDelete;"></button>
+
+            </td>
+            <td valign="bottom">
+                <button type="button" class="button button-icon icon ion-ios-plus-outline" ng-click="pickContact()"> </button>
+
+            </td>
+            <td valign="middle">
+
+                <h4> Carpool Buddies</h4>
+            </td>
+
+        </tr>
+    </table>
+    <ion-list show-delete="data.showDelete">
+
+        <ion-item ng-click="editContact(contact)" class="item item-thumbnail-left" ng-repeat="contact in carpool.CarpoolMembers">
+            <img src="{{contact.Photo}}" ng-if="contact.Photo != undefined ">
+            <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Silver_-_replace_this_image_male.svg/200px-Silver_-_replace_this_image_male.svg.png" ng-if="contact.Photo === undefined">
+            <h2>{{contact.DisplayName}}</h2>
+            <p ng-if="contact.Email != undefined">Email : {{contact.Email}}</p>
+            <p ng-if="contact.MobileNumber != undefined">Mobile Number : {{contact.MobileNumber}}</p>
+            <ion-delete-button type="button" class="ion-minus-circled"
+                               ng-click="onMemberDelete(contact)">
+            </ion-delete-button>
+
+        </ion-item>
+
+    </ion-list>
+
+    <!--
+    <div class="button-bar-inline">
+        <button type="button" ng-click="carpoolSave(carpool)" class="button button-positive button-block">Save My Carpool!</button>
+    </div>
+        -->
+</div>

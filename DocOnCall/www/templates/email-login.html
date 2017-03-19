@@ -1,0 +1,23 @@
+﻿<ion-view title="Account">
+    <ion-content class="padding">
+        <div class="list card">
+            
+            <h3>Step 2 of 5 - Enter your Work or School Email  </h3>
+            <div class="item item-divider">Work/School Email</div>
+            <form id="userData" ng-submit="loginUser(email)">
+                <label class="item item-input">
+                    <span class="input-label">Email:</span>
+
+                    <input id="email" placeholder="Enter Your E-mail" name="email" type="email" ng-model="email" />
+
+
+                </label>
+                <div class="button-bar">
+                    <button type="submit" class="button button-stable button-block">Validate Email</button>
+                </div>
+            </form>
+        </div>
+    </ion-content>
+</ion-view>
+
+

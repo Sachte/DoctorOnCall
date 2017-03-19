@@ -1,0 +1,78 @@
+﻿<ion-view hide-back-button="true"  cache-view="false" title='<img class="title-image" src="img/icon-40.png" />' >
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-navicon" ng-click="showMenu()">Profile</button>
+    </ion-nav-buttons>
+   
+        <ion-content>
+
+         
+
+                <tab-slide-box>
+                    <div class="tsb-icons">
+                        <div class="tsb-ic-wrp">
+                            <a href="javascript:;" class="ion-social-usd"></a>
+                            <a href="javascript:;" class="ion-ios-videocam"></a>
+                            <a href="javascript:;">Rx</a>
+                        </div>
+                    </div>
+                    <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged ($index)">
+                        <ion-slide>
+                            <div class="item item-divider">
+                                Credit Balance
+                            </div>
+
+                            <p>
+                                Your Credit Balance is <b> {{customer.AccountCBABalance}}</b>
+                            </p>
+
+                        </ion-slide>
+
+                        <ion-slide>
+                            <ion-content ng-class="{ isBrowserView : isBrowser== true }">
+                                <div class="item item-divider">
+                                    My Past Encounters
+                                </div>
+
+                                <ion-item ng-repeat="item in Encounters" class="item-icon-right " ng-click="encounterInfo(item)">
+                                    {{item.EncounterStartTime.toLocaleString()}} - Dr.{{item.Provider.LastName}} & {{item.Subscriber.LastName}}
+                                    <i class="icon ion-chevron-right icon-accessory"></i>
+                                </ion-item>
+                            </ion-content>
+
+                        </ion-slide>
+
+
+                        <ion-slide>
+                            <ion-content ng-class="{ isBrowserView : isBrowser== true }">
+                                <div class="item item-divider">
+                                    My Past Prescriptions
+                                </div>
+                                <ion-item ng-repeat="item in Prescriptions" class="item-icon-right" ng-click="prescriptionInfo(item)">
+                                    Dr.{{item.provider.LastName}} & {{item.customer.LastName}}
+                                    <i class="icon ion-chevron-right icon-accessory"></i>
+                                </ion-item>
+                              </ion-content>
+                            </ion-slide>
+                    </ion-slide-box>
+                </tab-slide-box>
+
+
+
+
+
+
+                <!--<ion-list>
+            <div class="item item-divider">
+                My Account
+           <a class="button" id="prsbutacc" ng-click="prescriptionView()">View Sample Prescription</a>
+
+            </div>
+
+
+
+
+        </ion-list>  -->
+      
+</ion-content>
+   
+</ion-view>

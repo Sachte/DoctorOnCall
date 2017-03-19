@@ -1,0 +1,34 @@
+﻿<ion-view view-title="New Carpool">
+    <form name="newCarpool" novalidate="" ng-submit="carpoolSave(editCarpool)">
+        <ion-content  scroll="false">
+            <tab-slide-box>
+                <div class="tsb-icons">
+                    <div class="tsb-ic-wrp">
+                        <a href="javascript:;" class="ion-model-s"></a>
+                        <a href="javascript:;" class="ion-location"></a>
+                        <a href="javascript:;" class="ion-ios-timer"></a>
+                        <a href="javascript:;" class="ion-calendar"></a>
+                        <a href="javascript:;" class="ion-person"></a>
+                    </div>
+                </div>
+                <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged ($index)">
+                    <ion-slide ng-repeat="slide in data.slides | filter:{viewable : true}">
+                        <ion-scroll style="height:100%">
+                            <div ng-include src="slide.template"></div>
+                    </ion-scroll>
+                    </ion-slide>
+
+                </ion-slide-box>
+            </tab-slide-box>
+
+        </ion-content>
+        <ion-footer-bar class="item-input-inset">
+
+            <div class="button-bar">
+                <button type="button" ng-click="carpoolSave(carpool)" ng-disabled="newCarpool.$invalid" class="button button-stable button-block">Update Carpool</button>
+
+            </div>
+
+        </ion-footer-bar>
+ </form>
+</ion-view>

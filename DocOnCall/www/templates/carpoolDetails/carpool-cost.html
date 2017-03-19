@@ -1,0 +1,51 @@
+﻿<div class="card">
+    
+    <div class="item item-divider">
+        Enter Carpool Details
+    </div>
+
+    <label class="item item-input validated" >
+        <span class="input-label">Carpool Name</span>
+        <input ng-disabled="true" name="carpoolName" type="text" placeholder="Irvine-DIRECTV Carpool" ng-model="carpool.Name">
+    </label>
+
+  
+    <label class="item item-input validated" >
+        <span class="input-label">Max Capacity</span>
+        <input ng-disabled="true" name="Capacity" type="number" placeholder="7" ng-model="carpool.Capacity">
+    </label>
+    
+    <label class="item item-input validated" >
+
+        <span class="input-label">Cost Per Ride</span>
+        <input ng-disabled="true" name="CostPerRide" type="number" placeholder="12.00" ng-model="carpool.CostPerRide">
+
+    </label>
+   
+
+
+
+    <div ng-show="selectedType=='vanPool'">
+        <div class="list">
+            <label class="item item-input validated " >
+                <label class="item item-input">
+                    <span class="input-label">Rental Fee</span>
+                    <input ng-disabled="true" name="FixedCost" type="number" placeholder="68.00" ng-model="carpool.FixedCost">
+                </label>
+            </label>
+          
+            <label class="item item-input validated " >
+                <label class="item item-input">
+                    <span class="input-label">Driver Credit</span>
+                    <input ng-disabled="true" name="DriverCredit" type="number" placeholder="5.00" ng-model="carpool.DriverCredit">
+                </label>
+            </label>
+            
+            <label class="item item-input">
+                <span class="input-label">Approx. Fuel Costs</span>
+                <input ng-disabled="true"  type="number" placeholder="600.00" ng-model="carpool.ApproximateFuelCosts">
+            </label>
+
+        </div>
+    </div>
+</div>

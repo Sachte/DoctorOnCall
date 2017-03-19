@@ -1,0 +1,205 @@
+﻿<ion-view hide-back-button="true"  cache-view="false" title='<img class="title-image" src="img/icon-40.png" />' class="map-view" >
+    <form name="searchRides" novalidate="" ng-submit="verifyCode(data.mobileverificationcode)">
+
+
+
+        <ion-content ng-class="{ isBrowserView : isBrowser== true }">
+        <!--  <div button-bar-inline>
+                <button class="button button-large button-block rounded" ng-class="'button-positive'" ng-click="walkinCall()"><i class="icon ion-ios-videocam"> Get me any available Doc! </i></button>
+
+            </div>
+         -->  
+
+            <div button-bar-inline>
+                <button class="button button-block rounded" ng-class="'button-positive'" ng-click="searchAndFindPopOver($event)"><i class="icon ion-ios-information-outline"> How to find a Doc </i></button>
+
+            </div>
+
+            <div class="card">
+
+
+                <div class="item  item-divider" ng-click="toggleShowSearch(!data.showSearch)">
+
+                    <!-- <div class="row">
+                        <div class="column col-top "> <h4>Show Search Panel</h4></div>
+                        <div class="column col-offset-10    ">
+                            <mh-toggle ng-model="data.showSearch" ng-checked="data.showSearch">
+
+                            </mh-toggle>
+                        </div>
+                    </div>
+                      -->
+                    {{data.toggleString}} Search Criteria
+                    <!--<a href="#" class="item-icon-right" ng-if="!data.showSearch" ng-click="toggleShowSearch(true)">
+
+                        <i class="icon ion-plus"></i>
+                    </a>
+
+                    <a href="#" class="item-icon-right" ng-if="data.showSearch " ng-click="toggleShowSearch(false)">
+                        <i class="icon ion-minus"></i>
+                    </a>-->
+                    <div ng-if="!data.showSearch"  class="item-icon-right">
+                        <i class="icon ion-plus"></i>
+                    </div>
+                    <div ng-if="data.showSearch" class="item-icon-right">
+                         <i class="icon ion-minus"></i>
+                    </div>
+                </div>
+
+                <div ng-show="data.showSearch">
+                    <div class="row">
+                        <div class="col">
+                            <label class="item  item-input validated" ng-class="{ 'has-errors' : searchRides.rideDate.$invalid, 'no-errors' : searchRides.rideDate.$valid}">
+                                <span class="input-label">
+                                    Date
+                                </span>
+                                <!-- <input type="date" name="rideDate" ng-model="data.ridedate" placeholder="" required />-->
+                                <ionic-datepicker input-obj="datepickerObject">
+                                    <button class="button button-block button-positive"> {{datepickerObject.inputDate | date:datepickerObject.dateFormat}}</button>
+                                </ionic-datepicker>
+                            </label>
+                            <div class="spacer"></div>
+                            <div class="error-container" ng-show=" searchRides.rideDate.$error" ng-messages="searchRides.rideDate.$error" ng-if='searchRides.rideDate.$dirty'> <div ng-messages-include="error-list.html"> </div> </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label class="item item-stacked-label validated " ng-class="{ 'has-errors' : searchRides.StartAddress.$invalid, 'no-errors' : searchRides.StartAddress.$valid}">
+                                <span class="input-label">Address</span>
+                                <ion-google-place ng-disabled="false" name="StartAddress" ng-displayaddress="data.StartAddress.formatted_address" placeholder="Enter Start Address" ng-model="data.StartAddress" required />
+
+                            </label>
+                            <div class="spacer"></div>
+                            <div class="error-container" ng-show=" searchRides.StartAddress.$error" ng-messages="searchRides.StartAddress.$error" ng-if='searchRides.StartAddress.$dirty'> <div ng-messages-include="error-list.html"> </div> </div>
+                        </div>
+                        <div class="col">
+                            <label class="item item-stacked-label  validated " ng-class="{ 'has-errors' : searchRides.fromWithinRadiusOf.$invalid, 'no-errors' : searchRides.fromWithinRadiusOf.$valid}">
+                                <span class="input-label">Within (Miles)</span>
+                                <input type="number" name="fromWithinRadiusOf" ng-model="data.fromWithinRadiusOf" placeholder="100" required />
+                            </label>
+                            <div class="spacer"></div>
+                            <div class="error-container" ng-show=" searchRides.fromWithinRadiusOf.$error" ng-messages="searchRides.fromWithinRadiusOf.$error" ng-if='searchRides.fromWithinRadiusOf.$dirty'> <div ng-messages-include="error-list.html"> </div> </div>
+                        </div>
+                    </div>
+
+                    <div button-bar-inline>
+                        <button class="button button-small button-block" ng-class="'button-positive'" ng-click="getRide()">Search Doctors</button>
+
+                    </div>
+                </div>
+                <div class="button-bar">
+                    <button class="button button-small" type="button" ng-class="showMap?'button-positive':'button-normal'" ng-click="showSection('map')">
+                        Dr Map
+                    </button>
+                    <button class="button button-small" type="button" ng-class="showList?'button-positive':'button-normal'" ng-click="showSection('list')">
+                        Dr List
+                    </button>
+                    <!--<button class="button button-small" type="button" ng-class="showInvitations?'button-positive':'button-normal'" ng-click="showSection('invitation')">
+                     Requests ({{RequestCount}})
+                    </button>-->
+                </div>
+                <div class="spacer">
+
+                </div>
+                <div>
+                    <div ng-if="showList">
+                        <!--  <ion-item class="item item-text-wrap" ng-repeat="ride in rides" href="#/tab/search/attendance/{{(ride.Id!=null && ride.Id!='')? ride.Id:(ride.Type=='Carpool'?ride.CarpoolID:ride.CustomerID)}}/{{customer.FirstName + ' ' + Customer.LastName}}/{{(ride.Id != '' && ride.Id!=null)?'Ride':ride.Type}}/{{data.ridedate.toDateString()}}/search">
+             -->
+
+                        <ion-item class="item item-text-wrap" ng-repeat="ride in rides">
+
+
+
+
+                            <!-- <img src="{{ride.Photo}}" ng-if="ride.Photo != undefined ">
+                <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Silver_-_replace_this_image_male.svg/200px-Silver_-_replace_this_image_male.svg.png" ng-if="ride.Photo === undefined">
+                -->
+                            <h2>{{ride.Name}}</h2>
+                            <p class="item-text-wrap" ng-if="ride.TotalCostPerRide != undefined"> <b>Cost :</b> USD {{ride.TotalCostPerRide}}</p>
+                            <p class="item-text-wrap" ng-if="ride.TotalCostPerRide != undefined"> <b>MobileNumber :</b> {{ride.Provider.MobileNumber}}</p>
+
+                            <p><b> Location :</b> {{ride.Provider.EndLocation.formatted_address}} - ({{ride.Provider.EndLocation.distance_from_search_location}} Miles)</p>
+                            <!--  <div class="item-icon-right">
+                      <i class="icon ion-ios-arrow-right"></i>
+                  </div>-->
+                            <div class="buttons">
+                                <button class="button button-icon button-clear icon " ng-click="initiateCall(ride,'Walkin')"><i class="icon ion-ios-videocam"> Video Consult </i></button>
+                                <button class="button button-icon button-clear " ng-click="goToProvDet(ride)"><i class="icon ion-calendar"> Book Apptmnt </i></button>
+                            </div>
+                        </ion-item>
+                    </div>
+                    <div ng-if="showMap" class="angular-google-map-container" data-tap-disabled="true">
+                        <ion-scroll style="height: 85%">
+                            <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" draggable="true" options="options" bounds="map.bounds">
+                                <ui-gmap-markers models="randomMarkers" coords="'self'" fit="true" icon="'icon'" click="onClick">
+                                    <ui-gmap-windows show="show">
+                                        <div ng-controller="infoWindowCtrl">
+                                            <div ng-non-bindable>
+                                                <h4>{{displayname}} </h4>
+                                                <p ng-if="ride.TotalCostPerRide != undefined"> <b>Cost : </b> USD {{TotalCostPerRide}}</p>
+                                                <p ng-if="ride.EndLocation != undefined"><b> Location :</b> {{EndLocation.formatted_address}} - ({{EndLocation.distance_from_search_location}} Miles)</p>
+
+                                            </div>
+
+
+                                            <div class="buttons">
+                                                <button class="button button-icon button-clear icon " ng-click="viewDetails('video')"><i class="icon ion-ios-videocam"> Video Consult </i></button>
+                                                <button class="button button-icon button-clear " ng-click="viewDetails('appointment')"><i class="icon ion-calendar"> Book Apptmnt </i></button>
+                                            </div>
+                                        </div>
+                                    </ui-gmap-windows>
+                                </ui-gmap-markers>
+                            </ui-gmap-google-map>
+                        </ion-scroll>
+                    </div>
+                    <div ng-if="showInvitations">
+                        <div ng-if="requestRides.length>0" class="item item-divider">
+                            Requests to Ride
+                        </div>
+                        <ion-item class="item item-text-wrap" ng-repeat="ride in requestRides" href="#/tab/search/attendance/{{(ride.Id!=null && ride.Id!='')? ride.Id:(ride.Type=='Carpool'?ride.CarpoolID:ride.CustomerID)}}/{{customer.FirstName + ' ' + Customer.LastName}}/{{(ride.Id != '' && ride.Id!=null)?'Ride':ride.Type}}/{{data.ridedate.toDateString()}}/attendance">
+                            <!-- <img src="{{ride.Photo}}" ng-if="ride.Photo != undefined ">
+                <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Silver_-_replace_this_image_male.svg/200px-Silver_-_replace_this_image_male.svg.png" ng-if="ride.Photo === undefined">
+                -->
+                            <h2>{{ride.Name}}</h2>
+                            <p class="item-text-wrap" ng-if="ride.CostPerRide != undefined"> <b>Cost : USD</b> {{ride.CostPerRide}}</p>
+                            <p class="item-text-wrap" ng-if="ride.StartAddress != undefined"><b>Start Location :</b> {{ride.StartAddress.formatted_address}} - ({{ride.StartAddress.distance_from_search_location}} Miles)</p>
+                            <p ng-if="ride.EndAddress != undefined"><b>End Location :</b> {{ride.EndAddress.formatted_address}} - ({{ride.EndAddress.distance_from_search_location}} Miles)</p>
+                            <div class="item-icon-right">
+                                <i class="icon ion-ios-arrow-right"></i>
+                            </div>
+                        </ion-item>
+
+                        <div ng-if="carpoolInvites.length>0" class="item item-divider">
+                            Carpool Invites
+                        </div>
+                        <ion-item class="item item-text-wrap" ng-repeat="carpool in carpoolInvites" href="#/tab/search/viewcarpool/{{carpool.Id}}/{{customer.Id}}/approve">
+                            <!-- <img src="{{ride.Photo}}" ng-if="ride.Photo != undefined ">
+                <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Silver_-_replace_this_image_male.svg/200px-Silver_-_replace_this_image_male.svg.png" ng-if="ride.Photo === undefined">
+                -->
+                            <h2>{{carpool.Name}}</h2>
+                            <p class="item-text-wrap" ng-if="carpool.CostPerRide != undefined"> <b>Cost :</b> {{carpool.CostPerRide}}</p>
+                            <p class="item-text-wrap" ng-if="carpool.StartAddress != undefined"><b>Start Location :</b> {{carpool.StartAddress.formatted_address}} - ({{carpool.StartAddress.distance_from_search_location}} Miles)</p>
+                            <p ng-if="carpool.EndAddress != undefined"><b>End Location :</b> {{carpool.EndAddress.formatted_address}} - ({{carpool.EndAddress.distance_from_search_location}} Miles)</p>
+                            <div class="item-icon-right">
+                                <i class="icon ion-ios-arrow-right"></i>
+                            </div>
+                        </ion-item>
+
+
+
+                        <div ng-if="carpoolInvites.length<=0 && requestRides.length<=0 " class="item item-divider">
+                            No Requests
+                        </div>
+                        <ion-item class="item item-text-wrap" ng-if="carpoolInvites.length<=0 && requestRides.length<=0 ">
+                            <h2>You do not have any ride requests at this time!</h2>
+                        </ion-item>
+                    </div>
+               </div>
+
+              </div>
+
+        </ion-content>
+    </form>
+
+</ion-view>

@@ -1,0 +1,53 @@
+﻿<ion-view  title="Expense Report">
+    <ion-content>
+        <div class="row">
+            <div class="col">
+                <label >
+                    <span class="input-label">
+                        From Date
+                    </span>
+                    <!-- <input type="date" name="rideDate" ng-model="data.ridedate" placeholder="" required />-->
+                    <ionic-datepicker input-obj="startDatepickerObject">
+                        <button class="button button-block button-positive"> {{startDatepickerObject.inputDate | date:startDatepickerObject.dateFormat}}</button>
+                    </ionic-datepicker>
+                </label>
+                <div class="spacer"></div>
+              </div>
+
+            <div class="col">
+                <label>
+                    <span class="input-label">
+                        To Date
+                    </span>
+                    <!-- <input type="date" name="rideDate" ng-model="data.ridedate" placeholder="" required />-->
+                    <ionic-datepicker input-obj="endDatepickerObject">
+                        <button class="button button-block button-positive"> {{endDatepickerObject.inputDate | date:endDatepickerObject.dateFormat}}</button>
+                    </ionic-datepicker>
+                </label>
+                <div class="spacer"></div>
+            </div>
+        </div>
+        <ion-list>
+
+            <div class="item col-header item-icon-right">
+                <div class="flex-container wrap">
+                    <div ng-repeat="column in data.columns" ng-click="sortBy(column.id)">
+                        <div class="column" ng-class="{ 'underlined' : data.sortOn === column.id }">{{column.name}}&nbsp;</div>
+                        <div class="column-sort">
+                            <i ng-class="{'ion-chevron-up' : data.sortReverse === false, 'ion-chevron-down' : data.sortReverse === true} " ng-if="data.sortOn === column.id"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item low-pad-item item-icon-right" ng-repeat="item in data.items | orderBy:sortData:data.sortReverse ">
+                <div class="flex-container wrap">
+                    <div ng-repeat="column in data.columns">
+                        <div class="column">{{item[column.id]}}&nbsp;</div>
+                    </div>
+                </div>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </div>
+        </ion-list>
+
+    </ion-content>

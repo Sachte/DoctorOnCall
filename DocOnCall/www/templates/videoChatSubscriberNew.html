@@ -1,0 +1,22 @@
+﻿<ion-view view-title="Video Encounter" hide-tabs hide-back-button="true" cache-view="false">
+    <ion-content>
+ 
+         
+        <div id="doctor-wait"  class="item item-text-wrap">
+
+            <h3> Please wait while we connect you to the doctor!</h3>
+            <p> if the wait is too long You can hangup and book an appointment!</p>
+           
+        </div>  
+        <div button-bar-inline>
+            <button id="hangup" class="button  button-block rounded" ng-class="'button-positive'" ><i class="icon ion-ios-videocam"> Hang Up </i></button>
+
+        </div>
+         
+      <div class="remote" id="myRemoteVideo" class="subscriber-video">
+          
+      </div>
+       <video  id="myMiniVideo" autoplay="autoplay"  muted="true" class="publisher-video"></video>
+       
+    </ion-content>
+</ion-view>

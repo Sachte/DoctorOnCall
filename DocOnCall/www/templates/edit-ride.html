@@ -1,0 +1,98 @@
+﻿<ion-view view-title="Edit Ride">
+    <ion-content has-header="false" padding="true">
+
+        <div class="list">
+
+            <div class=" item item-divider">
+               Edit Ride Details
+            </div>
+
+              <label class="item text-left" name="carpool">
+                  <span class="input-label"><b>Carpool Name :</b> {{ride.Name}}</span>               
+                  <span class="input-label"><b>Origin:</b> {{ride.StartAddress.formatted_address}}</span>
+                  <span class="input-label"><b>Destination :</b> {{ride.EndAddress.formatted_addres}} </span>
+                  <span class="input-label"><b>Date:</b> {{data.rideDate}} </span>
+
+                  <ion-checkbox ng-model="data.isToDestinationChecked" >To Destination</ion-checkbox>
+                  <ion-checkbox ng-model="data.isFromDestinationChecked">From Destination</ion-checkbox>
+                </label>
+
+            <label class="item item-select" name="Driver">
+                <span class="input-label">Select Driver</span>
+                <select ng-disabled="false" ng-model="data.selectedpassenger" ng-options="passenger.DisplayName for passenger in ride.RidePassengers"></select>
+            </label>
+
+        </div>
+
+        <div class="list">
+
+
+            <div class=" item item-divider">
+                 Passengers
+            </div>
+
+            <ion-checkbox ng-repeat="passenger in ride.RidePassengers track by $index"
+                          ng-disabled="passenger.isUsageCommitted"
+                          ng-model="passenger.isPassenger"
+                          ng-checked="passenger.isPassenger"
+                          ng-change="passengerSelected(passenger)">
+                {{ passenger.DisplayName}}-{{passenger.MobileNumber}}
+            </ion-checkbox>
+
+
+          </div>
+
+        <div class="list">
+               
+            <div class="item item-divider">
+                <table>
+                    <tr>
+                        <td valign="bottom">
+                            <div class="buttons">
+                                
+                                <button type="button" class="button button-icon icon ion-ios-plus-outline" ng-click="newContact()"> </button>
+
+                            </div>
+                        </td>
+                        <td valign="top">
+                         Stand-By Passengers
+                        </td>
+                    </tr>
+                </table>
+            </div>
+                <div id="search-bar">
+                    <div class="item item-input-inset">
+                        <label class="item-input-wrapper" id="search-input">
+                            <i class="icon ion-search placeholder-icon"></i>
+                            <input type="text" placeholder="Search and select to add" ng-model="data.ContactSearchStr" ng-change="searchContacts()">
+
+                        </label>
+                        
+                    </div>
+                </div>
+                <!--
+            <div ng-repeat="contact in data.contacts" class="item">
+                {{contact.DisplayName }}
+            </div>
+            -->
+                <ion-checkbox ng-repeat="contact in data.contacts track by $index"
+                              ng-model="contact.isPassenger"
+                              ng-checked="contact.isPassenger"
+                              ng-change="contactSelected(contact)">
+                    {{ contact.DisplayName}}-{{contact.MobileNumber}}
+                </ion-checkbox>
+
+            </div>
+    </ion-content>
+
+     <ion-footer-bar  class="item-input-inset">
+
+        <div class="button-bar">
+            <button class="button button-stable button-block" ng-click="save()">Save</button>
+           <!-- <button class="button button-stable button-block" ng-click="saveAndStartRide()">Save & Start Ride</button>-->
+         
+        </div>
+
+    </ion-footer-bar>
+
+</ion-view>

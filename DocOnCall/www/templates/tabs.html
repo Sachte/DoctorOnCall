@@ -1,0 +1,55 @@
+<!-- 
+  Create tabs with an icon and label, using the tabs-positive style. 
+  Each tab's child <ion-nav-view> directive will have its own 
+  navigation history that also transitions its views in and out.
+-->
+<ion-tabs  class="tabs-icon-top tabs-positive {{$root.hideTabs}}">
+
+
+  <!-- Find Doctor Tab -->
+  <ion-tab title="Find a Doc!" ng-if="main.isNotProvider(this)" icon="icon ion-search" href="#/tab/search"
+   on-select="main.onSearchTabSelected(this)" >   
+    <ion-nav-view name="tab-search"></ion-nav-view>
+  </ion-tab>
+
+    <!-- See Doctor Tab -->
+    <ion-tab title="See a Doc!" ng-if="main.isNotProvider(this)" icon="icon ion-videocamera" href="#/tab/search/videochatsubscriberNew/NA/%20/Pool"
+             on-select="main.onSeeDocSelected(this)">
+        <ion-nav-view name="tab-seeDoc"></ion-nav-view>
+    </ion-tab>
+
+   <!-- Appointments Tab -->
+  <ion-tab  ng-if="main.isProvider(this)" title="Appointments"   icon="icon ion-calendar" href="#/tab/provider/providerAppointments"
+      on-select="main.onAppointmentsTabSelected(this)" 
+      on-deselect="main.onAppointmentsTabDeselected(this)"
+        >
+    <ion-nav-view   name="tab-provider"></ion-nav-view>
+  </ion-tab>
+
+ <!-- Consultation Tab -->
+  <ion-tab  ng-if="main.isProvider(this)" title="Patient Queues"   icon="icon ion-videocamera" href="#/tab/provider/videoSessions"
+      on-select="main.onVideoConsulationTabSelected(this)" 
+      on-deselect="main.onVideoConsulationTabDeselected(this)"
+        >
+    <ion-nav-view   name="tab-provider"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Account Tab -->
+  <ion-tab  title="Account Info"  ng-if="main.True(this)" icon="icon ion-clipboard" href="#/tab/account"
+             on-select="main.onAccountTabSelected(this)" 
+             on-deselect="main.onAccountTabDeselected(this)"
+           >
+    <ion-nav-view   name="tab-account"></ion-nav-view>
+  </ion-tab>
+
+  
+  
+
+ 
+
+   
+
+    
+
+
+</ion-tabs>

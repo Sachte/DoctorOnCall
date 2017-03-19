@@ -1,0 +1,16 @@
+<ion-view title="Account" cache-view="false" >
+  <ion-content class="padding">
+    <h1>Account</h1>
+        <ion-list>
+            <div class="item item-divider">
+                MyEncounters                                       
+            </div>
+                                       
+            <ion-item ng-repeat=" item in Encounters" class="item-icon-right" ng-click="">
+                            {{item.PaymentAmount}} - {{item.Provider.LastName}} & - {{item.Subscriber.LastName}} 
+                            <i class="icon ion-chevron-right icon-accessory"></i>
+            </ion-item>
+                             
+        </ion-list>  
+  </ion-content>
+</ion-view>

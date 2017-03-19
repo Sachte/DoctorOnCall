@@ -1,0 +1,47 @@
+﻿<div class="card">
+    <div class="item item-divider">
+        Schedule
+    </div>
+
+    <div class="row row-center">
+        <div class="col"></div>
+        <div class="col">Dep. Time</div>
+        <div class="col">Arr. Time</div>
+    </div>
+    <div class="row row-center">
+        <div class="col">Workbound</div>
+        <div class="col">
+            <ionic-timepicker input-obj="slotsWorkboundDepartrure">
+
+                <button type="button" class="button button-block button-positive"> <standard-time-meridian etime='slotsWorkboundDepartrure.inputEpochTime'></standard-time-meridian> </button>
+            </ionic-timepicker>
+        </div>
+
+        <div class="col">
+            <ionic-timepicker input-obj="slotsWorkboundArrival">
+
+                <button type="button" class="button button-block button-positive"> <standard-time-meridian etime='slotsWorkboundArrival.inputEpochTime'></standard-time-meridian> </button>
+            </ionic-timepicker>
+        </div>
+
+    </div>
+
+    <div class="row row-center">
+        <div class="col">Homebound</div>
+        <div class="col">
+            <ionic-timepicker input-obj="slotsHomeboundDepartrure">
+
+                <button type="button" class="button button-block button-positive"> <standard-time-meridian etime='slotsHomeboundDepartrure.inputEpochTime'></standard-time-meridian> </button>
+            </ionic-timepicker>
+        </div>
+        <div class="col">
+            <ionic-timepicker input-obj="slotsHomeboundArrival">
+
+                <button type="button" class="button button-block button-positive"> <standard-time-meridian etime='slotsHomeboundArrival.inputEpochTime'></standard-time-meridian> </button>
+            </ionic-timepicker>
+
+        </div>
+    </div>
+
+</div>
+

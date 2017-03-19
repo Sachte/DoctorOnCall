@@ -1,0 +1,381 @@
+﻿<ion-view title="Registration">
+           <ion-content>
+
+           <tab-slide-box >
+              <div class="tsb-icons">
+                   
+                      <div class="tsb-ic-wrp">
+                    <!--     <a  class="not-active" >1</a>
+                        <a  class="not-active" >2</a>
+                        <a  class="not-active" >3</a>
+                        <a  class="not-active" >4</a>
+                        <a  class="not-active" >5</a>
+                        <a  class="not-active" >6</a>
+                        <a  class="not-active" >7</a>
+                        <a  class="not-active" >8</a>
+                      <a  class="not-active" >9</a>-->
+                      </div>
+                      
+                </div>
+                <ion-slide-box show-pager="true"  on-slide-changed="slideHasChanged($index)">
+                    <ion-slide>
+                        <form name="registerSlideMobileVerification" novalidate="" ">
+                            <ion-content>
+                                <div class="card list-inset">
+                                    <div class="item item-divider">
+                                        Step 1 of 4
+                                    </div>
+                                    <h4>Enter the mobile verification code that was sent to your mobile phone - {{mobilenumber}}</h4>
+                                    <label class="item item-input validated" ng-class="{ 'has-errors' :registerSlideMobileVerification.mobileverificationcode.$invalid, 'no-errors' : registerSlideMobileVerification.mobileverificationcode.$valid}">
+
+                                        <span class="input-label">Verification Code:</span>
+
+
+                                        <input id="mobileverificationcode" name="mobileverificationcode" type="number" ng-model="data.mobileverificationcode" required />
+
+
+                                    </label>
+                                    <div class="error-container" ng-show="registerSlideMobileVerification.$error" ng-messages="registerSlideMobileVerification.mobileverificationcode.$error" ng-if='registerSlideMobileVerification.mobileverificationcode.$dirty'>
+                                        <div> <div ng-messages-include="error-list.html"> </div> </div>
+                                    </div>
+
+                                    <div class="button-bar-inline">
+                                        <button type="button"    ng-click="verifyCode(data.mobileverificationcode);registerSlideMobileVerification.$invalid=true;" ng-disabled="registerSlideMobileVerification.$invalid" class="button button-positive button-block">Validate Code</button>
+
+                                        <button type="button"    ng-click="resendVerificationCode(mobilenumber,'text')" class="button button-stable button-block">Resend Code</button>
+                                      
+                                         <button type="button" ng-click="resendVerificationCode(mobilenumber,'voice')" class="button button-stable button-block">Call Me with the code</button>
+
+
+                                    </div>
+                                </div>
+                            </ion-content>
+                        </form>
+                        <!--
+                 <ion-footer-bar class="item-input-inset">
+
+                     <div class="button-bar">
+                        <button ng-click="verifyCode(data.mobileverificationcode)" class="button button-positive button-block">Validate Code</button>
+
+                         <button ng-click="resendVerificationCode(mobilenumber)" class="button button-stable button-block">Resend Code</button>
+
+                     </div>
+
+                 </ion-footer-bar>
+                -->
+                    </ion-slide>
+
+                    <ion-slide>
+                        <form name="registerSlideEmail" novalidate="" ng-submit="loginUser(email);registerSlideEmail.$invalid=true">
+                            <ion-content>
+
+                                <div class="card">
+
+
+                                    <div class="item item-divider">Step 2 of 4</div>
+                                    <h4>Enter your Email</h4>
+
+
+                                    <label class="item item-input validated" ng-class="{ 'has-errors' :registerSlideEmail.email.$invalid, 'no-errors' : registerSlideEmail.email.$valid}">
+                                        <span class="input-label">Email:</span>
+                                        <input id="email" placeholder="Enter Your E-mail" name="email" type="email" ng-model="data.email" required />
+                                    </label>
+                                    <div class="error-container" ng-show="registerSlideEmail.$error" ng-messages="registerSlideEmail.email.$error" ng-if='registerSlideEmail.email.$dirty'>
+                                        <div> <div ng-messages-include="error-list.html"> </div> </div>
+                                    </div>
+
+                                    <div class="button-bar-inline">
+                                        <button type="submit" ng-disabled="registerSlideEmail.$invalid" class="button button-positive button-block">Validate Email</button>
+                                    </div>
+
+                                </div>
+
+                            </ion-content>
+                        </form>
+                        <!--   <ion-footer-bar class="item-input-inset">
+
+                    <div class="button-bar">
+                        <button type="button" ng-click="loginUser(email)" class="button button-positive button-block">Validate Email</button>
+                    </div>
+
+                </ion-footer-bar>
+                 -->
+                    </ion-slide>
+
+                    <ion-slide>
+                        <form name="registerSlideEmailVerification" novalidate="" ng-submit="verifyEmailCode(emailverificationcode);registerSlideEmailVerification.$invalid=true;">
+                            <ion-content>
+
+                                <div class="list card">
+
+
+                                    <div class="item item-divider">Step 3 of 4</div>
+                                    <h4>Enter the email verification code that was sent to your email address - {{ data.email }}</h4>
+                                    <label class="item item-input validated" ng-class="{ 'has-errors' :registerSlideEmailVerification.emailverificationcode.$invalid, 'no-errors' : registerSlideEmailVerification.emailverificationcode.$valid}">
+                                        <span class="input-label">Verification Code:</span>
+
+
+                                        <input id="emailverificationcode" name="emailverificationcode" type="number" ng-model="data.emailverificationcode" required />
+
+
+                                    </label>
+                                    <div class="error-container" ng-show="registerSlideEmailVerification.$error" ng-messages="registerSlideEmailVerification.emailverificationcode.$error" ng-if='registerSlideEmailVerification.emailverificationcode.$dirty'> <div> <div ng-messages-include="error-list.html"> </div> </div> </div>
+
+                                    <div class="button-bar-inline">
+                                        <button type="submit" ng-disabled="registerSlideEmailVerification.$invalid" class="button button-positive button-block">Validate Code</button>
+                                        <button type="button" ng-click="resendEmailVerificationCode(email)" class="button button-stable button-block">Resend Code</button>
+                                        
+                                         <b>Warning - If you chose to skip verification, You will not be able to reveive payments and refunds from us.</b>
+                                        <button type="button" ng-disabled="data.skipButtonDisabled" ng-click="skipEmailVerification(email)" class="button button-stable button-block">Skip Verification</button>
+
+                                    </div>
+                                </div>
+
+
+                            </ion-content>
+                        </form>
+
+                        <!--   <ion-footer-bar class="item-input-inset">
+                    <div class="button-bar">
+
+                        <button ng-click="verifyEmailCode(emailverificationcode)" class="button button-positive button-block">Validate Code</button><br />
+                        <button ng-click="resendEmailVerificationCode(email)" class="button button-stable button-block">Resend Code</button>
+
+                    </div>
+                </ion-footer-bar>
+                -->
+
+
+
+                    </ion-slide>
+  <ion-slide>
+                        <form name="registerSlideProvider" novalidate="" ng-submit="customerSave(detailcustomer);registerSlideProvider.$invalid=true;">
+                            <ion-content>
+                                <div class="list card">
+                                    <div class="item item-divider">Step 4 of 4</div>
+
+                                    <h4>Enter a few Details about You</h4>
+
+                                    <label class="item item-input validated" ng-class="{ 'has-errors' : registerSlideProvider.firstName.$invalid, 'no-errors' : registerSlideProvider.firstName.$valid}">
+                                        <span class="input-label">First Name</span>
+                                        <input ng-disabled="false" name="firstName" type="text" placeholder="Enter First Name" ng-model="customer.firstName" required>
+                                    </label>
+                                    <div class="error-container" ng-show=" registerSlideProvider.firstName.$error" ng-messages="registerSlideProvider.firstName.$error" ng-if='registerSlideProvider.firstName.$dirty'> <div> <div ng-messages-include="error-list.html"> </div> </div> </div>
+                                    <div class="spacer"></div>
+
+                                    <label class="item item-input validated" ng-class="{ 'has-errors' : registerSlideProvider.lastName.$invalid, 'no-errors' : registerSlideProvider.lastName.$valid}">
+                                        <span class="input-label">Last Name</span>
+                                        <input ng-disabled="false" name="lastName" type="text" placeholder="Enter Last Name" ng-model="customer.lastName" required>
+                                    </label>
+                                  
+                                    <div class="error-container" ng-show=" registerSlideProvider.lastName.$error" ng-messages="registerSlideProvider.lastName.$error" ng-if='registerSlideProvider.lastName.$dirty'> <div> <div ng-messages-include="error-list.html"> </div> </div> </div>
+
+                                   
+                                    <div class="spacer"></div>  
+                                    <label class="item item-input validated" ng-class="{ 'has-errors' : registerSlideProvider.ProviderLicense.$invalid, 'no-errors' : registerSlideProvider.ProviderLicense.$valid}">
+                                        <span class="input-label">License Number</span>
+                                        <input ng-disabled="false" name="ProviderLicense" type="text" placeholder="Enter License Number" ng-model="customer.ProviderLicense" required>
+                                    </label>          
+                                    <div class="error-container" ng-show=" registerSlideProvider.ProviderLicense.$error" ng-messages="registerSlideProvider.ProviderLicense.$error" ng-if='registerSlideProvider.ProviderLicense.$dirty'> <div> <div ng-messages-include="error-list.html"> </div> </div> </div>
+                                
+
+                                      <div class="spacer"></div>
+
+                                    <label class="item item-input validated" ng-class="{ 'has-errors' : registerSlideProvider.CostPerRide.$invalid, 'no-errors' : registerSlideProvider.CostPerRide.$valid}">
+                                        <span class="input-label"> Encounter Cost</span>
+                                        <input ng-disabled="false" name="CostPerRide" type="text" placeholder="Cost Of Encounter" ng-model="customer.CostPerRide" required>
+                                    </label>
+                                   
+                             
+                                    <div class="error-container" ng-show=" registerSlideProvider.CostPerRide.$error" ng-messages="registerSlideProvider.CostPerRide.$error" ng-if='registerSlideProvider.CostPerRide.$dirty'> <div> <div ng-messages-include="error-list.html"> </div> </div> </div>
+                                    
+                                     <div class="spacer"></div>
+
+
+
+
+
+
+                                    <div class="spacer"></div>
+
+                                    <label class="item item-input validated" ng-class="{ 'has-errors' : registerSlideProvider.ProviderAppointmentDuration.$invalid, 'no-errors' : registerSlideProvider.ProviderAppointmentDuration.$valid}">
+                                        <span class="input-label"> Encounter Duration</span>
+                                        <input ng-disabled="false" name="ProviderAppointmentDuration" type="text" placeholder="Enter Encounter Duration" ng-model="customer.ProviderAppointmentDuration" required>
+                                    </label>
+                                   
+                             
+                                    <div class="error-container" ng-show=" registerSlideProvider.ProviderAppointmentDuration.$error" ng-messages="registerSlideProvider.ProviderAppointmentDuration.$error" ng-if='registerSlideProvider.ProviderAppointmentDuration.$dirty'> <div> <div ng-messages-include="error-list.html"> </div> </div> </div>
+                                    
+                                     <div class="spacer"></div>
+
+                                    <label class="item item-input validated " ng-class="{ 'has-errors' : registerSlideProvider.HomeLocation.$invalid, 'no-errors' : registerSlideProvider.HomeLocation.$valid}">
+                                        <span class="input-label">Home Address</span>
+                                        <ion-google-place  ng-disabled="false" name="HomeLocation" ng-displayaddress="customer.HomeLocation.formatted_address" placeholder="Enter Home Address" ng-model="customer.HomeLocation" required />
+                                    </label>
+                                    <div class="error-container" ng-show="registerSlideProvider.HomeLocation.$error" ng-messages="registerSlideProvider.HomeLocation.$error" ng-if='registerSlideProvider.HomeLocation.$dirty'> <div ng-messages-include="error-list.html"> </div>  </div>
+                                     <div class="spacer"></div>
+
+                                     <label class="item item-input validated " ng-class="{ 'has-errors' : registerSlideProvider.EndLocation.$invalid, 'no-errors' : registerSlideProvider.EndLocation.$valid}">
+                                        <span class="input-label">Work Address</span>
+                                        <ion-google-place  ng-disabled="false" name="EndLocation" ng-displayaddress="customer.EndLocation.formatted_address" placeholder="Enter Work Address" ng-model="customer.EndLocation" required />
+                                    </label>
+                                    <div class="error-container" ng-show="registerSlideProvider.EndLocation.$error" ng-messages="registerSlideProvider.EndLocation.$error" ng-if='registerSlideProvider.EndLocation.$dirty'> <div ng-messages-include="error-list.html"> </div>  </div>
+                                     <div class="spacer"></div>
+                                 
+
+                                     <label class="item item-input item-select">
+                                        <span class="input-label">Specialty</span>
+                                        <select ng-model="customer.Category" >
+                                            <option>Internal Medicine</option>
+                                            <option>Family Medicine</option>
+                                            <option>Primary Care</option>
+                                            <option>Ear Nose Throat</option>
+                                            <option>Heart Care</option>
+                                            <option>Pediatrics</option>
+                                        </select>
+                                    </label> 
+
+                                    <!--
+                                    <label class="item item-select item-stacked-label validated" name="Address Selector">
+                                        <span class="input-label">Select work location</span>
+                                        <select ng-model="customer.EndLocation" ng-options="location.formatted_address for location in customer.customerOrganization.OrganizationLocation"></select>
+                                    </label>
+                       
+                                    <div class="text-center"> <b>OR</b></div> 
+                                        -->
+
+
+                                    <div class="button-bar-inline">
+                                        <button type="submit" ng-disabled="registerSlideProvider.$invalid" class="button button-positive button-block">Save My Info</button>
+                                    </div>
+                                </div>
+
+                            </ion-content>
+                        </form>
+                        <!--   <ion-footer-bar class="item-input-inset">
+
+                    <div class="button-bar">
+                        <button type="button" ng-click="customerSave(detailCustomer)" class="button button-positive button-block">Save My Info</button>
+                    </div>
+
+                </ion-footer-bar>
+                -->
+                    </ion-slide>
+         
+
+                    <ion-slide>
+                        <form name="registerSlideCustomer" novalidate="">
+                            <ion-content>
+                                <div class="list card">
+                                    <div class="item item-divider">Step 4 of 4</div>
+
+                                    <h4>Enter a few Details about You</h4>
+
+                                    <label class="item item-input validated" ng-class="{ 'has-errors' : registerSlideCustomer.firstName.$invalid, 'no-errors' : registerSlideCustomer.firstName.$valid}">
+                                        <span class="input-label">First Name</span>
+                                        <input ng-disabled="false" name="firstName" type="text" placeholder="Enter First Name" ng-model="customer.firstName" required>
+                                    </label>
+                                    <div class="error-container" ng-show=" registerSlideCustomer.firstName.$error" ng-messages="registerSlideCustomer.firstName.$error" ng-if='registerSlideCustomer.firstName.$dirty'> <div> <div ng-messages-include="error-list.html"> </div> </div> </div>
+                                    <div class="spacer"></div>
+
+                                    <label class="item item-input validated" ng-class="{ 'has-errors' : registerSlideCustomer.lastName.$invalid, 'no-errors' : registerSlideCustomer.lastName.$valid}">
+                                        <span class="input-label">Last Name</span>
+                                        <input ng-disabled="false" name="lastName" type="text" placeholder="Enter Last Name" ng-model="customer.lastName" required>
+                                    </label>
+                                    <div class="spacer"></div>
+                                    <div class="error-container" ng-show=" registerSlideCustomer.lastName.$error" ng-messages="registerSlideCustomer.lastName.$error" ng-if='registerSlideCustomer.lastName.$dirty'> <div> <div ng-messages-include="error-list.html"> </div> </div> </div>
+
+                                    
+
+                                    <label class="item  item-input validated" >
+                                        <span class="input-label">
+                                            Date of birth
+                                        </span>
+                                    <!-- <input type="date" name="rideDate" ng-model="data.ridedate" placeholder="" required />-->
+                                        <ionic-datepicker input-obj="datepickerObject">
+                                            <button class="button button-block button-positive"> {{datepickerObject.inputDate | date:datepickerObject.dateFormat}}</button>
+                                        </ionic-datepicker>
+                                    </label>
+                                    <div class="spacer"></div>
+                                         
+                                   
+                                   
+                                   
+                                   
+                                    <label class="item item-input validated " ng-class="{ 'has-errors' : registerSlideCustomer.HomeLocation.$invalid, 'no-errors' : registerSlideCustomer.HomeLocation.$valid}">
+                                        <span class="input-label">Home Location</span>
+                                        <ion-google-place  ng-disabled="false" name="HomeLocation" ng-displayaddress="customer.HomeLocation.formatted_address" placeholder="Enter Home Address" ng-model="customer.HomeLocation" required />
+                                    </label>
+                                    <div class="spacer"></div>
+                                    <div class="error-container" ng-show="registerSlideCustomer.HomeLocation.$error" ng-messages="registerSlideCustomer.HomeLocation.$error" ng-if='registerSlideCustomer.HomeLocation.$dirty'> <div ng-messages-include="error-list.html"> </div> </div>
+
+                                    
+                                     <label class="item item-input validated " ng-class="{ 'has-errors' : registerSlideCustomer.EndLocation.$invalid, 'no-errors' : registerSlideCustomer.EndLocation.$valid}">
+                                        <span class="input-label">Work Location</span>
+                                        <ion-google-place  ng-disabled="false" name="EndLocation" ng-displayaddress="customer.EndLocation.formatted_address" placeholder="Enter Home Address" ng-model="customer.EndLocation" required />
+                                    </label>
+                                    <div class="spacer"></div>
+                                    <div class="error-container" ng-show="registerSlideCustomer.EndLocation.$error" ng-messages="registerSlideCustomer.EndLocation.$error" ng-if='registerSlideCustomer.EndLocation.$dirty'> <div ng-messages-include="error-list.html"> </div> </div>
+
+
+
+
+                                    
+
+                                     <label class="item item-input validated" ng-class="{ 'has-errors' : registerSlideCustomer.NextOfKinName.$invalid, 'no-errors' : registerSlideCustomer.NextOfKinName.$valid}">
+                                        <span class="input-label">Next of kin name</span>
+                                        <input ng-disabled="false" name="NextOfKinName" type="text" placeholder="Enter Kin Name" ng-model="customer.NextOfKinName" required>
+                                    </label>    
+                                    <div class="spacer"></div>
+                                    <div class="error-container" ng-show=" registerSlideCustomer.NextOfKinName.$error" ng-messages="registerSlideCustomer.NextOfKinName.$error" ng-if='registerSlideCustomer.NextOfKinName.$dirty'> <div> <div ng-messages-include="error-list.html"> </div> </div> </div>
+                                    
+                                    <label class="item item-input validated" ng-class="{ 'has-errors' : registerSlideCustomer.NextOfKinPhone.$invalid, 'no-errors' : registerSlideCustomer.NextOfKinPhone.$valid}">
+                                        <span class="input-label">Next of kin phone number</span>
+                                        <input ng-disabled="false" name="NextOfKinPhone" type="text" placeholder="Enter Kin Phone Number" ng-model="customer.NextOfKinPhone" required>
+                                    </label>    
+                                    <div class="spacer"></div>
+                                    <div class="error-container" ng-show=" registerSlideCustomer.NextOfKinPhone.$error" ng-messages="registerSlideCustomer.NextOfKinPhone.$error" ng-if='registerSlideCustomer.NextOfKinPhone.$dirty'> <div> <div ng-messages-include="error-list.html"> </div> </div> </div>
+
+                                   <label class="item item-input validated" ng-class="{ 'has-errors' : registerSlideCustomer.NextOfKinRelation.$invalid, 'no-errors' : registerSlideCustomer.NextOfKinRelation.$valid}">
+                                        <span class="input-label">Next of Kin relation</span>
+                                        <input ng-disabled="false" name="NextOfKinRelation" type="text" placeholder="Enter Next Of Kin Relation" ng-model="customer.NextOfKinRelation" required>
+                                    </label>    
+                                    <div class="spacer"></div>
+                                    <div class="error-container" ng-show=" registerSlideCustomer.NextOfKinRelation.$error" ng-messages="registerSlideCustomer.NextOfKinRelation.$error" ng-if='registerSlideCustomer.NextOfKinRelation.$dirty'> <div> <div ng-messages-include="error-list.html"> </div> 
+                         
+                                 
+                                    </div> </div>
+                                    <!--
+                                    <label class="item item-select item-stacked-label validated" name="Address Selector">
+                                        <span class="input-label">Select work location</span>
+                                        <select ng-model="customer.EndLocation" ng-options="location.formatted_address for location in customer.customerOrganization.OrganizationLocation"></select>
+                                    </label>
+                       
+                                    <div class="text-center"> <b>OR</b></div> 
+                                            -->
+
+
+                                    <div class="button-bar-inline">
+                                        <button type="button" ng-disabled="registerSlideCustomer.$invalid" ng-click="customerSave(detailcustomer);registerSlideCustomer.$invalid=true;" class="button button-positive button-block">Save My Info</button>
+                                    </div>
+                                </div>
+
+                            </ion-content>
+                        </form>
+                        <!--   <ion-footer-bar class="item-input-inset">
+
+                    <div class="button-bar">
+                        <button type="button" ng-click="customerSave(detailCustomer)" class="button button-positive button-block">Save My Info</button>
+                    </div>
+
+                    </ion-footer-bar>
+                    -->
+                    </ion-slide>
+                </ion-slide-box>
+     </tab-slide-box>
+               
+
+</ion-content>
+
+    
+</ion-view>

@@ -1,0 +1,13 @@
+﻿<ion-view title="Rides">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon icon ion-plus-round" ng-click="gotodriverrideusage()"></button>       
+
+    </ion-nav-buttons>
+    <ion-content>
+        <ion-list>                                                                                              
+            <ion-item ng-repeat="ride in data.rides" type="item-text-wrap" href="#/tab/editride/{{ride.Id}}" )">
+                {{ride.Name}}
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

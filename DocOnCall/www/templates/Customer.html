@@ -1,0 +1,58 @@
+﻿<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view title="Customer Details">
+    <ion-content class="padding">
+      
+        <div class="list card">
+            <h3>Step 5 of 5 - Enter A few Details about You </h3>
+            <div class="item item-divider">Personal Information</div>
+            <form name="detailCustomer" novalidate="" ng-submit="customerSave(detailCustomer)">
+               
+
+                    
+
+                    
+
+
+
+                        <label class="item item-input validated" ng-class="{ 'has-errors' : detailCustomer.firstName.$invalid, 'no-errors' : detailCustomer.firstName.$invalid}">
+                            <span class="input-label">First Name</span>
+                            <input ng-disabled="false" name="firstName" type="text" placeholder="Enter First Name" ng-model="customer.firstName" required>
+                        </label>
+                        <label class="item item-input validated" ng-class="{ 'has-errors' : detailCustomer.lastName.$invalid, 'no-errors' : detailCustomer.lastName.$invalid}">
+                            <span class="input-label">Last Name</span>
+                            <input ng-disabled="false" name="lastName" type="text" placeholder="Enter Last Name" ng-model="customer.lastName" required>
+                        </label>
+
+                        <div class="error-container" ng-show=" detailCustomer.lastName.$error" ng-messages="detailCustomer.lastName.$error" ng-if='detailCustomer.lastName.$dirty' > <div ng-messages-include="error-list.html"> </div> </div>
+
+
+                        <label class="item item-input validated " ng-class="{ 'has-errors' : detailCustomer.endLocation.$invalid, 'no-errors' : detailCustomer.endLocation.$valid}">
+                            <span class="input-label">Home Location</span>
+                            <ion-google-place ng-disabled="false" name="HomeLocation" ng-displayaddress="customer.HomeLocation.formatted_address" placeholder="Enter Home Address" ng-model="customer.HomeLocation" required />
+                        </label>
+                        <div class="error-container" ng-show=" detailCustomer.HomeLocation.$error" ng-messages="detailCustomer.HomeLocation.$error" ng-if='detailCustomer.HomeLocation.$dirty' > <div ng-messages-include="error-list.html"> </div> </div>
+
+                        <label class="item item-select" name="Address Selector">
+                            <span class="input-label">Select End Address</span>
+                            <select ng-model="customer.EndLocation" ng-options="location.formatted_address for location in customer.customerOrganization.OrganizationLocation"></select>
+                        </label>
+
+
+                   
+
+
+                        <div class="button-bar'">
+                            <button type="submit" class="button button-stable button-block">Save My Info</button>
+                        </div>
+
+                 
+
+            </form>
+            </div>
+        </ion-content>
+</ion-view>

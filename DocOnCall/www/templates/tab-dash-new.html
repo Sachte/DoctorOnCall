@@ -1,0 +1,37 @@
+<ion-view cache-view="false"  title='<img class="title-image" src="img/icon-40.png" />' name="tab-dash">
+    
+
+        <ion-nav-buttons side="right" >
+            <button class="button button-icon button-clear ion-navicon" ng-click="showMenu()"></button>
+        </ion-nav-buttons>
+   
+    <ion-content class="padding">
+       
+        <div class="item item-divider">My Carpools</div>
+            <div class="item item-body">
+                <form name="dashForm">
+                    <label class="item item-input">
+                        <span class="input-label">Date</span>
+                      <!-- <input type="date" ng-model="data.ridedate" placeholder=""  ng-change="refreshdata()"/>--> 
+                        <ionic-datepicker input-obj="datepickerObject">
+                            <button class="button button-block button-positive"> {{datepickerObject.inputDate | date:datepickerObject.dateFormat}}</button>
+                        </ionic-datepicker>
+                    </label>
+                    <label class="item item-input-inset" ng-class="{ 'has-errors' : dashForm.rideList.$invalid, 'no-errors' : dashForm.rideList.$valid}">
+                        <span class="input-label">Select Ride</span>
+
+                        <!-- <select ng-disabled="data.mode=='search'" ng-change="updateWorkBoundDriver()" ng-model="data.workBoundDriver" ng-options="passenger.DisplayName for passenger in drivers=(workBoundRide.RidePassengers| filter: isActiveDriver) "></select> -->
+                        <input ion-autocomplete name="rideList"  type="text" items-clicked-method="RideCarpoolSelected(callback)" ng-model="data.selectedRide" items-method="memberRides" item-view-value-key="Name" autocomplete="off" max-selected-items="1" required select-items-label="Select the Ride/Carpool..." selected-items-label="Selected Ride/Carpool:" />
+                        <i class="icon ion-arrow-down-b "></i>
+                    </label>
+                    <div class="button-bar-inline">
+                        <button type="button" ng-click="gotodriverrideusage()"  class="button button-positive button-block">Record Ride</button>
+                        <button type="button" ng-click="openJoinStatusModal()" class="button button-stable button-block">Are you Joining?</button>
+                        <button type="button" ng-click="gotoexpense()" ng-if="data.selectedRide.Type == 'Carpool'" class="button button-stable button-block">Track Expense</button>
+
+                    </div>
+                 
+                </form>
+            </div>      
+    </ion-content>
+</ion-view>

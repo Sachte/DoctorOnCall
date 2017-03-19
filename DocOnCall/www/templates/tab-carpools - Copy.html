@@ -1,0 +1,155 @@
+<ion-view cache-view="false" title="Carpools">
+    <ion-content >
+        <!-- <ion-nav-buttons side="right">
+
+             <button  class="button button-icon icon ion-navicon" ng-click="showActionsheet()"></button>
+         </ion-nav-buttons>
+         <div style="position: relative; top: 11%; bottom: 0px; left: 0px; right: 0px;" >-->
+        <!--  <ion-scroll direction="y" style="width: 100%;height: {{carpoolHeight}} !important;">-->
+
+        <ion-list ng-show="showInvitations">
+            
+            <div class="item item-divider">My Carpool Invitations</div>
+            <ion-item ng-repeat="membercarpool in membercarpoolsPending = (Customer.CustomerCarpools | filter :  {RegistrationStatus: '!' +'Active'})" type="item-text-wrap" href="#/tab/viewcarpool/{{membercarpool.CarpoolID}}/{{Customer.Id}}/approve">
+                <div class="item-icon-left">
+                    <i class="icon ion-email"></i>
+                    <h2>{{membercarpool.CarpoolName}}</h2>
+
+                </div>
+                <div class="item-icon-right">
+                    <i class="icon ion-ios-arrow-right"></i>
+                </div>
+            </ion-item>
+            <div ng-hide="membercarpoolsPending.length">You do not have any open carpool invitations</div>
+
+        </ion-list>
+        <ion-list>
+            <div class="item item-divider">My Active Carpools</div>
+            <!--<ion-item ng-repeat="membercarpool in membercarpoolsRegistered = (Customer.CustomerCarpools  | filter :  {RegistrationStatus:'Active'})" type="item-text-wrap" href="#/tab/viewcarpool/{{membercarpool.CarpoolID}}/{{Customer.Id}}/edit">-->
+            <ion-item ng-repeat="membercarpool in membercarpoolsRegistered = (Customer.CustomerCarpools  | filter :  {RegistrationStatus:'Active'})" type="item-text-wrap" href="#/tab/actionscarpool/{{membercarpool.CarpoolID}}">
+                <div class="item-icon-left">
+                    <i class="icon ion-email"></i>
+                    <h2>{{membercarpool.CarpoolName}}</h2>
+
+                </div>
+                <div class="item-icon-right">
+                    <i class="icon ion-ios-arrow-right"></i>
+                </div>
+
+            </ion-item>
+            <div ng-hide='membercarpoolsRegistered.length'>You do not have any active carpools</div>
+
+        </ion-list>
+        <!-- </ion-scroll>-->
+        <!--
+         <ion-content style="top:50%;height:100%" ng-show="showInvitations">
+
+             <div class="list">
+                 <div class="item item-divider" ion-affix data-affix-within-parent-with-class="list">My Carpool Invitations</div>
+                 <ion-list>
+
+
+                     <ion-item ng-repeat="membercarpool in membercarpoolsPending = (Customer.CustomerCarpools | filter :  {RegistrationStatus: '!' +'Active'})" type="item-text-wrap" href="#/tab/viewcarpool/{{membercarpool.CarpoolID}}/{{Customer.Id}}/approve">
+                         <div class="item-icon-left">
+                             <i class="icon ion-email"></i>
+                             <h2>{{membercarpool.CarpoolName}}</h2>
+
+                         </div>
+                         <div class="item-icon-right">
+                             <i class="icon ion-ios-arrow-right"></i>
+                         </div>
+                     </ion-item>
+                     <div ng-hide="membercarpoolsPending.length">You do not have any open carpool invitations</div>
+
+                 </ion-list>
+             </div>
+         </ion-content>
+            -->
+        <!--   </div>-->
+        </ion-content>
+</ion-view>
+
+<!--
+    
+    <ion-view>
+
+    <ion-nav-buttons side="left">
+        <button class="button button-positive button-clear no-animation"
+                ng-click="startApp()" ng-if="!slideIndex">
+            Skip Intro
+        </button>
+        <button class="button button-positive button-clear no-animation"
+                ng-click="previous()" ng-if="slideIndex > 0">
+            Previous Slide
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button class="button button-positive button-clear no-animation"
+                ng-click="next()" ng-if="slideIndex != 2">
+            Next
+        </button>
+        <button class="button button-positive button-clear no-animation"
+                ng-click="startApp()" ng-if="slideIndex == 2">
+            Start using MyApp
+        </button>
+    </ion-nav-buttons>
+
+    <ion-slide-box on-slide-changed="slideChanged(index)">
+        <ion-slide>
+            <h3>Thank you for choosing the Awesome App!</h3>
+            <div id="logo">
+                <img src="http://code.ionicframework.com/assets/img/app_icon.png">
+            </div>
+            <p>
+                We've worked super hard to make you happy.
+            </p>
+            <p>
+                But if you are angry, too bad.
+            </p>
+        </ion-slide>
+        <ion-slide>
+            <h3>Using Awesome</h3>
+
+            <div id="list">
+                <h5>Just three steps:</h5>
+                <ol>
+                    <li>Be awesome</li>
+                    <li>Stay awesome</li>
+                    <li>There is no step 3</li>
+                </ol>
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <h3>Any questions?</h3>
+            <p>
+                Too bad!
+            </p>
+        </ion-slide>
+    </ion-slide-box>
+
+</ion-view>
+-->
+
+<!--
+<ion-view title="Create New Carpool">
+    <ion-nav-buttons side="left">
+        <button class="button button-positive button-clear no-animation"
+                ng-click="previous()" ng-if="data.slideIndex > 0">
+            Previous
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button class="button button-positive button-clear no-animation"
+                ng-click="next()" ng-if="data.slideIndex < data.numViewableSlides - 1">
+            Next
+        </button>
+    </ion-nav-buttons>
+    <ion-slide-box on-slide-changed="slideChanged(index)">
+
+        <ion-slide ng-repeat="slide in data.slides | filter:{viewable : true}">
+            <div ng-include src="slide.template"></div>
+        </ion-slide>
+
+    </ion-slide-box>
+</ion-view>
+    -->

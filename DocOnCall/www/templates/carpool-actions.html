@@ -1,0 +1,35 @@
+﻿<ion-view title="Actions">
+    <ion-content>
+       
+        <div class="list card">
+            <div class="item item-divider">
+                Carpool - {{carpool.Name}}
+            </div>
+            <a href="#/tab/dash/carpools/actions-viewcarpool/{{CarpoolID}}/{{CustomerID}}/edit" class="item item-icon-left">
+                <i class="icon ion-home"></i>
+                View Carpool Details
+            </a>
+            <a href="#/tab/dash/carpools/actions-expensereport/{{CarpoolID}}" class="item item-icon-left">
+                <i class="icon ion-card"></i>
+                Expense Report
+            </a>
+            <!--
+            <a href="#" class="item item-icon-left" ng-click="gotoRides()">
+                <i class="icon ion-ios-telephone"></i>
+                Rides
+            </a>
+            <a href="#" class="item item-icon-left">
+                <i class="icon ion-card"></i>
+                Payments
+            </a>
+            -->
+            <a ng-show="showEdit" href="#/tab/dash/carpools/actions-editcarpool/{{CarpoolID}}" class="item item-icon-left">
+                <i class="icon ion-wifi"></i>
+                Edit Carpool Details
+            </a>
+
+
+
+        </div>
+    </ion-content>
+ </ion-view>

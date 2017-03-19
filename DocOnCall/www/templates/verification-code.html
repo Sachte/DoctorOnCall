@@ -1,0 +1,50 @@
+﻿<ion-view title="Mobile Code" cache-view="false">
+    <ion-content class="padding">
+        <div class="list card">
+          
+           
+            
+            <form id="userData">
+                <div class="item item-divider">Mobile Code Verification</div>
+                <p>Enter the mobile verification code that was sent your mobile phone -<b> {{mobilenumber}} </b> </p>
+
+               <!--<label class="item item-input">
+                    <span class="input-label">Verification Code:</span>
+
+
+                    <input id="mobileverificationcode" name="mobileverificationcode" type="tel" ng-model="mobileverificationcode" />
+
+
+                </label>
+                <div class="button-bar-inline">
+                    <button ng-click="verifyCode(mobileverificationcode)" class="button button-positive button-block">Validate Code</button>
+                    <button ng-click="resendVerificationCode(mobilenumber)" class="button button-stable button-block">Resend Code</button>
+                </div>
+                --> 
+                <label class="item item-input validated" ng-class="{ 'has-errors' :userData.mobileverificationcode.$invalid, 'no-errors' : userData.mobileverificationcode.$valid}">
+
+                    <span class="input-label">Verification Code:</span>
+
+
+                    <input id="mobileverificationcode" name="mobileverificationcode" type="number" ng-model="data.mobileverificationcode" required />
+
+
+                </label>
+                <div class="error-container" ng-show="userData.$error" ng-messages="userData.mobileverificationcode.$error" ng-if='userData.mobileverificationcode.$dirty'>
+                    <div> <div ng-messages-include="error-list.html"> </div> </div>
+                </div>
+
+                <div class="button-bar-inline">
+                    <button type="button" ng-click="verifyCode(mobileverificationcode);data.disableLogin=true;" ng-disabled="data.disableLogin==true" class="button button-positive button-block">Validate Code</button>
+
+                    <button type="button" ng-click="resendVerificationCode(mobilenumber,'text')" class="button button-stable button-block">Resend Code</button>
+
+                    <button type="button" ng-click="resendVerificationCode(mobilenumber,'voice')" class="button button-stable button-block">Call Me with the code</button>
+
+                </div>
+
+
+            </form>
+            </div>
+</ion-content>
+</ion-view> 

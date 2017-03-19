@@ -1,0 +1,258 @@
+﻿<ion-view cache-view="false" title="Attendance">
+   
+
+    <form name="attendance" novalidate="" ng-submit="save()">
+       
+        <ion-content   >
+            
+            <tab-slide-box tab="1">
+                <div class="tsb-icons">
+                    <div class="tsb-ic-wrp">
+                        <a href="javascript:;" class="ion-location"> </a>
+                        <a href="javascript:;" class="ion-android-desktop"> </a>
+                        <a href="javascript:;" class="ion-home"></a>
+                    </div>
+                </div>
+                <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged ($index)">
+                    <ion-slide>
+                    <div class="list card">
+                            <div class="item item-divider">
+                                Details - {{data.rideDate}}
+                            </div>
+                            <label class="item item-input validated " ng-class="{ 'has-errors' : workBoundRide.StartAddress.$invalid, 'no-errors' : workBoundRide.StartAddress.$valid}">
+                                <span class="input-label">Homebound Address</span>
+                                <ion-google-place ng-disabled="data.mode=='search'" name="StartAddress" ng-displayaddress="workBoundRide.StartAddress.formatted_address" placeholder="Enter Start Address" ng-model="carpool.StartAddress" required />
+                            </label>
+                            <div class="error-container" ng-show=" workBoundRide.StartAddress.$error" ng-messages="workBoundRide.StartAddress.$error" ng-if='workBoundRide.StartAddress.$dirty' > <div ng-messages-include="error-list.html"> </div> </div>
+
+
+
+                            <label class="item item-input validated" ng-class="{ 'has-errors' : workBoundRide.EndAddress.$invalid, 'no-errors' : workBoundRide.EndAddress.$valid}">
+                                <span class="input-label">Workbound Address</span>
+                                <ion-google-place ng-disabled="data.mode=='search'"  name="EndAddress" ng-displayaddress="workBoundRide.EndAddress.formatted_address" placeholder="Enter End Address" ng-model="workBoundRide.EndAddress" required />
+                            </label>
+                            <div class="error-container" ng-show=" workBoundRide.EndAddress.$error" ng-messages="workBoundRide.EndAddress.$error" ng-if='workBoundRide.EndAddress.$dirty' > <div ng-messages-include="error-list.html"> </div> </div>
+
+                            <label class="item item-input validated" ng-class="{ 'has-errors' : workBoundRide.Distance.$invalid, 'no-errors' : workBoundRide.Distance.$valid}">
+                                <span class="input-label">Distance </span>
+                                <input ng-disabled="data.mode=='search'" name="Distance" type="number" placeholder="40" ng-model="workBoundRide.Distance" required>
+                            </label>
+                            <div class="error-container" ng-show=" workBoundRide.Distance.$error" ng-messages="workBoundRide.Distance.$error" ng-if='workBoundRide.Distance.$dirty' > <div ng-messages-include="error-list.html"> </div> </div>
+                     
+                            <div class="spacer"></div>  
+                        <label class="item item-input validated " ng-class="{ 'has-errors' : workBoundRide.CostPerRide.$invalid, 'no-errors' : workBoundRide.CostPerRide.$valid}">
+
+                            <span class="input-label">Cost Per Ride</span>
+                            <input name="CostPerRide" type="number" placeholder="12.00" ng-model="workBoundRide.CostPerRide" ng-change="calculateFees()"  required="required">
+
+                        </label>
+                        <div class="error-container" ng-show=" workBoundRide.CostPerRide.$error" ng-messages="workBoundRide.CostPerRide.$error" ng-if='workBoundRide.CostPerRide.$dirty'> <div ng-messages-include="error-list.html"> </div> </div>
+                      
+                        <label class="item item-input validated " ng-disabled  ng-class="{ 'has-errors' : workBoundRide.PlatformFeePerRide.$invalid, 'no-errors' : workBoundRide.PlatformFeePerRide.$valid}">
+
+                            <span class="input-label">Platform Fee</span>
+                            <input name="PlatformFeePerRide" type="number" placeholder="12.00" ng-model="workBoundRide.PlatformFeePerRide" required="required">
+
+                        </label>
+                        <div class="error-container" ng-show="workBoundRide.PlatformFeePerRide.$error" ng-messages="workBoundRide.PlatformFeePerRide.$error" ng-if='workBoundRide.PlatformFeePerRide.$dirty'> <div ng-messages-include="error-list.html"> </div> </div>
+
+
+                        <label class="item item-input validated " ng-disabled  ng-class="{ 'has-errors' : workBoundRide.TotalCostPerRide.$invalid, 'no-errors' : workBoundRide.TotalCostPerRide.$valid}">
+
+                            <span class="input-label">Total Cost</span>
+                            <input name="TotalCostPerRide" type="number" placeholder="12.00" ng-model="workBoundRide.TotalCostPerRide" required="required">
+
+                        </label>
+                        <div class="error-container" ng-show="workBoundRide.TotalCostPerRide.$error" ng-messages="workBoundRide.TotalCostPerRide.$error" ng-if='workBoundRide.TotalCostPerRide.$dirty'> <div ng-messages-include="error-list.html"> </div> </div>
+
+
+                        </div>
+
+                    </ion-slide>
+
+                    <ion-slide >
+                        <ion-scroll style="height:85%">
+                            <div class="list card">
+
+                                <div class="item item-divider">Workbound-{{data.rideDate}}</div>
+
+
+                                <label class="item item-input-inset"  ng-class="{ 'has-errors' : attendance.driver.$invalid, 'no-errors' : attendance.driver.$valid}">
+                                    <span class="input-label">Select Driver</span>
+
+                                   <!-- <select ng-disabled="data.mode=='search'" ng-change="updateWorkBoundDriver()" ng-model="data.workBoundDriver" ng-options="passenger.DisplayName for passenger in drivers=(workBoundRide.RidePassengers| filter: isActiveDriver) "></select> -->
+                                    <input  ion-autocomplete  name="driver" ng-disabled="data.mode=='search'"  type="text" items-clicked-method="WorkBoundDriverSelected(callback)"  ng-model="data.workBoundDriver" items-method="workBoundRide.RidePassengers|filter: isActiveDriver" item-view-value-key="DisplayName" autocomplete="off" max-selected-items="1" required select-items-label="Select the Driver..." selected-items-label="Selected Driver:"/>
+                                    <i class="icon ion-arrow-down-b "></i>
+                                 </label>
+                                <div class="spacer"></div>
+                                <div class="error-container" ng-show="attendance.driver.$error" ng-messages="attendance.driver.$error" ng-if='attendance.driver.$dirty'> <div ng-messages-include="error-list.html"> </div> </div>
+                                <div class="spacer"></div>
+
+                               
+
+                                
+                                <div class="item item-divider" ng-if="(workBoundRide.RidePassengers | filter : searchPendingRiders).length>0">
+                                    Wait List
+                                </div>
+
+                                <ion-list>
+
+                                    <ion-item ng-repeat="passenger in acceptedPassengers = (workBoundRide.RidePassengers | filter :  searchPendingRiders) track by $index" item="member" class="item-button-right">
+
+                                        {{ passenger.DisplayName}}-{{passenger.MobileNumber}}
+                                        <br /> Status: {{passenger.Status}}
+                                        <div ng-if="passenger.isJoining!='False'">
+                                            Joining@ <standard-time-meridian etime='passenger.ETA'></standard-time-meridian>
+                                        </div>
+                                        <div ng-if="passenger.isJoining=='False'">
+                                            Not Joining
+                                        </div>
+                                        <div class="buttons">
+                                            <button type="button" ng-if="data.mode!='search'  && data.isLoggedInUserStandby==false" class="button button-positive" ng-click="AcceptWorkbound(passenger)">
+                                                <i class="icon ion-checkmark"></i>
+                                            </button>
+                                            <button type="button" ng-if="data.mode!='search' && data.isLoggedInUserStandby==false && passenger.Status!='Declined'" class="button button-assertive" ng-click="RejectWorkbound(passenger)">
+                                                <i class="icon ion-close"></i>
+                                            </button>
+                                        </div>
+
+                                    </ion-item>
+
+
+                                </ion-list>
+                                <div class="item item-divider">
+                                    Passengers
+                                </div>
+
+                                <ion-checkbox ng-repeat="passenger in acceptedPassengers = (workBoundRide.RidePassengers | filter : searchApprovedRiders) track by $index"
+                                              ng-disabled="data.mode=='search' || data.isLoggedInUserStandby  || passenger.isUsageCommitted || (workBoundRide.Type=='Carpool' && passenger.RegistrationStatus!='Active')"
+                                              ng-model="passenger.isPassenger"
+                                              ng-checked="passenger.isPassenger"
+                                              ng-change="passengerSelected(passenger)">
+                                    {{ passenger.DisplayName}}-{{passenger.MobileNumber}}
+                                    <div ng-if="passenger.RegistrationStatus!='Active'">
+                                        Registration Status - Not Yet Active.
+                                     </div>
+                                    <div ng-if="passenger.isJoining!='False'">
+                                        Joining@ <standard-time-meridian etime='passenger.ETA'></standard-time-meridian>
+                                    </div>
+                                    <div ng-if="passenger.isJoining=='False'">
+                                        Not Joining
+                                    </div>
+
+                                </ion-checkbox>
+
+
+
+
+                            </div>
+
+                        </ion-scroll>
+                    </ion-slide>
+
+                    <ion-slide>
+                        <ion-scroll style="height:85%">
+                        
+                                <div class="list card">
+                                    <div class="item item-divider">Homebound-{{data.rideDate}}</div>
+                                   
+
+                                      <!-- <label class="item item-select" name="Driver">
+                                            <span class="input-label">Select Driver</span>
+                                            <select ng-disabled="data.mode=='search'" ng-model="data.homeBoundDriver" ng-change="updateHomeBoundDriver()" ng-options="passenger.DisplayName for passenger in homeBoundRide.RidePassengers"></select>
+                                        </label>
+                                        --> 
+                                    <label class="item item-input-inset" ng-class="{ 'has-errors' : attendance.homedriver.$invalid, 'no-errors' : attendance.homedriver.$valid}">
+                                        <span class="input-label">Select Driver</span>
+
+                                        <!-- <select ng-disabled="data.mode=='search'" ng-change="updateWorkBoundDriver()" ng-model="data.workBoundDriver" ng-options="passenger.DisplayName for passenger in drivers=(workBoundRide.RidePassengers| filter: isActiveDriver) "></select> -->
+                                        <input ion-autocomplete name="homedriver" ng-disabled="data.mode=='search'" type="text" items-clicked-method="HomeBoundDriverSelected(callback)" ng-model="data.homeBoundDriver" items-method="homeBoundRide.RidePassengers|filter: isActiveDriver" item-view-value-key="DisplayName" autocomplete="off" max-selected-items="1" required select-items-label="Select the Driver..." selected-items-label="Selected Driver:" />
+                                        <i class="icon ion-arrow-down-b "></i>
+                                    </label>
+                                    <div class="spacer"></div>
+                                    <div class="error-container" ng-show="attendance.homedriver.$error" ng-messages="attendance.homedriver.$error" ng-if='attendance.homedriver.$dirty'> <div ng-messages-include="error-list.html"> </div> </div>
+                                    <div class="spacer"></div>
+                                        <div class="item item-divider" ng-if="(workBoundRide.RidePassengers | filter : searchPendingRiders).length>0">
+                                            Wait List
+                                        </div>
+                                       
+                                        <ion-list>
+
+                                          
+
+                                            <ion-item ng-repeat="passenger in acceptedPassengers = (homeBoundRide.RidePassengers | filter :  searchPendingRiders) track by $index" item="member" class="item-button-right">
+
+                                                {{ passenger.DisplayName}}-{{passenger.MobileNumber}}
+                                                <br /> Status: {{passenger.Status}}
+                                                <div ng-if="passenger.isJoining!='False'">
+                                                    Joining@ <standard-time-meridian etime='passenger.ETA'></standard-time-meridian>
+                                                </div>
+                                                <div ng-if="passenger.isJoining=='False'">
+                                                    Not Joining
+                                                </div>
+                                                <div class="buttons">
+                                                    <button type="button" ng-if="data.mode!='search'  && data.isLoggedInUserStandby==false" class="button button-positive" ng-click="AcceptWorkbound(passenger)">
+                                                        <i class="icon ion-checkmark"></i>
+                                                    </button>
+                                                    <button type="button" ng-if="data.mode!='search' && data.isLoggedInUserStandby==false && passenger.Status!='Declined'" class="button button-assertive" ng-click="RejectWorkbound(passenger)">
+                                                        <i class="icon ion-close"></i>
+                                                    </button>
+                                                </div>
+
+                                            </ion-item>
+
+
+                                        </ion-list>
+
+                                        <div class=" item item-divider">
+                                            Passengers
+                                        </div>
+                                        <!--   "passengers in acceptedPassengers = (homeBoundRide.RidePassengers | filter : searchApprovedRiders)" )-->
+                                        <ion-checkbox ng-repeat="passenger in acceptedPassengers = (homeBoundRide.RidePassengers | filter : searchApprovedRiders) track by $index"
+                                                      ng-disabled="data.mode=='search' || data.isLoggedInUserStandby ||  passenger.isUsageCommitted || (homeBoundRide.Type=='Carpool' && passenger.RegistrationStatus!='Active')"
+                                                      ng-model="passenger.isPassenger"
+                                                      ng-checked="passenger.isPassenger"
+                                                      ng-change="passengerSelected(passenger)">
+                                            {{ passenger.DisplayName}}-{{passenger.MobileNumber}}
+                                            <div ng-if="passenger.RegistrationStatus!='Active'">
+                                                Registration Status - {{passenger.RegistrationStatus}}.
+                                            </div>
+                                            <div ng-if="passenger.isJoining!='False'">
+                                                Joining@ <standard-time-meridian etime='passenger.ETA'></standard-time-meridian>
+                                            </div>
+                                            <div ng-if="passenger.isJoining=='False'">
+                                                Not Joining
+                                            </div>
+
+                                        </ion-checkbox>
+
+
+
+                                   
+                                </div>
+                            
+                         </ion-scroll>
+                </ion-slide>
+
+                </ion-slide-box>
+            </tab-slide-box>
+
+        </ion-content>
+        
+        <ion-footer-bar class="item-input-inset">
+
+            <div class="button-bar">
+              
+                    <button ng-if="data.mode!='search'"  class="button button-stable button-block" type="submit">Save</button>
+                
+                
+                    <button ng-if="data.mode=='search'"  class="button button-stable button-block" type="button" ng-click="addRiderAndSave()">Request Ride</button>
+               
+            </div>
+
+        </ion-footer-bar>
+
+    </form>
+</ion-view>
+
+

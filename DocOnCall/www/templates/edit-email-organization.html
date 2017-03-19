@@ -1,0 +1,152 @@
+﻿<ion-view title="Email">
+   
+       
+        <ion-content>
+
+            <tab-slide-box tab="0">
+                <div class="tsb-icons">
+                    <div class="tsb-ic-wrp">
+                      
+                        <a class="not-active" >1</a>
+                        <a class="not-active" >2</a>
+                        <a class="not-active" >3</a>                        
+                    </div>
+                </div>
+                <ion-slide-box show-pager="false"  on-slide-changed="slideHasChanged($index)">
+                  
+
+                    <ion-slide>
+                        <form name="registerSlideEmail" novalidate="" ng-submit="loginUser(email)">
+                            <ion-content>
+
+                                <div class="card">
+
+
+                                    <div class="item item-divider">Step 1 of 3</div>
+                                    <h4>Enter your Work/School Email</h4>
+
+
+                                    <label class="item item-input validated" ng-class="{ 'has-errors' :registerSlideEmail.email.$invalid, 'no-errors' : registerSlideEmail.email.$valid}">
+                                        <span class="input-label">Email:</span>
+                                        <input id="email" placeholder="Enter Your E-mail" name="email" type="email" ng-model="data.email" required />
+                                    </label>
+                                    <div class="error-container" ng-show="registerSlideEmail.$error" ng-messages="registerSlideEmail.email.$error" ng-if='registerSlideEmail.email.$dirty'>
+                                        <div> <div ng-messages-include="error-list.html"> </div> </div>
+                                    </div>
+
+                                    <div class="button-bar-inline">
+                                        <button type="submit" ng-disabled="registerSlideEmail.$invalid" class="button button-positive button-block">Validate Email</button>
+                                    </div>
+
+                                </div>
+
+                            </ion-content>
+                        </form>
+                        <!--   <ion-footer-bar class="item-input-inset">
+
+                    <div class="button-bar">
+                        <button type="button" ng-click="loginUser(email)" class="button button-positive button-block">Validate Email</button>
+                    </div>
+
+                </ion-footer-bar>
+                 -->
+                    </ion-slide>
+
+                    <ion-slide>
+                        <form name="registerSlideEmailVerification" novalidate="" ng-submit="verifyEmailCode(emailverificationcode)">
+                            <ion-content>
+
+                                <div class="list card">
+
+
+                                    <div class="item item-divider">Step 2 of 3</div>
+                                    <h4>Enter the email verification code that was sent to your email address - {{ data.email }}</h4>
+                                    <label class="item item-input validated" ng-class="{ 'has-errors' :registerSlideEmailVerification.emailverificationcode.$invalid, 'no-errors' : registerSlideEmailVerification.emailverificationcode.$valid}">
+                                        <span class="input-label">Verification Code:</span>
+
+
+                                        <input id="emailverificationcode" name="emailverificationcode" type="number" ng-model="data.emailverificationcode" required />
+
+
+                                    </label>
+                                    <div class="error-container" ng-show="registerSlideEmailVerification.$error" ng-messages="registerSlideEmailVerification.emailverificationcode.$error" ng-if='registerSlideEmailVerification.emailverificationcode.$dirty'> <div> <div ng-messages-include="error-list.html"> </div> </div> </div>
+
+                                    <div class="button-bar-inline">
+                                        <button type="submit" ng-disabled="registerSlideEmailVerification.$invalid" class="button button-positive button-block">Validate Code</button>
+                                        <button type="button" ng-click="resendEmailVerificationCode(email)" class="button button-stable button-block">Resend Code</button>
+                                        <b>Warning - If you chose to skip Verification, Other Drivers from your Workplace/School will see you as unverified and may chode not to carpool with you.</b>
+                                        <button type="button" ng-click="skipEmailVerification(email)" class="button button-stable button-block">Skip Verification</button>
+
+
+                                    </div>
+                                </div>
+
+
+                            </ion-content>
+                        </form>
+
+                        <!--   <ion-footer-bar class="item-input-inset">
+                    <div class="button-bar">
+
+                        <button ng-click="verifyEmailCode(emailverificationcode)" class="button button-positive button-block">Validate Code</button><br />
+                        <button ng-click="resendEmailVerificationCode(email)" class="button button-stable button-block">Resend Code</button>
+
+                    </div>
+                </ion-footer-bar>
+                -->
+
+
+
+                    </ion-slide>
+
+                    <ion-slide>
+                        <form name="registerSlideEmployer" novalidate="" ng-submit="organizationSave(detailOrganization)">
+                            <ion-content>
+                                <div class="card">
+
+
+                                    <div class="item item-divider">
+                                        Step 3 of 3
+                                    </div>
+
+                                    <h4> Enter some information about your employer/school</h4>
+
+                                    <label class="item item-input validated" ng-class="{ 'has-errors' : registerSlideEmployer.organizationName.$invalid, 'no-errors' : registerSlideEmployer.organizationName.$valid}">
+                                        <span class="input-label">Name</span>
+                                        <input ng-disabled="false" name="organizationName" type="text" placeholder="Irvine-DIRECTV" ng-model="organization.OrganizationName" required>
+                                    </label>
+                                    <div class="spacer"></div>
+                                    <div class="error-container" ng-show=" registerSlideEmployer.organizationName.$error" ng-messages="registerSlideEmployer.organizationName.$error" ng-if='registerSlideEmployer.organizationName.$dirty'> <div> <div ng-messages-include="error-list.html"> </div> </div> </div>
+
+
+                                    <label class="item item-input validated " ng-class="{ 'has-errors' : registerSlideEmployer.Address.$invalid, 'no-errors' : registerSlideEmployer.Address.$valid}">
+                                        <span class="input-label">Address</span>
+                                        <ion-google-place ng-disabled="false" name="Address" ng-displayaddress="organization.OrganizationLocation.formatted_address" placeholder="Enter Address" ng-model="data.OrganizationLocation" required />
+                                    </label>
+                                    <div class="spacer"></div>
+                                    <div class="error-container" ng-show=" registerSlideEmployer.Address.$error" ng-messages="registerSlideEmployer.Address.$error" ng-if='registerSlideEmployer.Address.$dirty'> <div> <div ng-messages-include="error-list.html"> </div> </div> </div>
+                                    <div class="button-bar-inline">
+                                        <button type="submit" ng-disabled="registerSlideEmployer.$invalid" class="button button-positive button-block"> Save Organization Details</button>
+                                    </div>
+
+                                </div>
+                            </ion-content>
+                        </form>
+                        <!--  <ion-footer-bar class="item-input-inset">
+
+                    <div class="button-bar">
+                        <button type="button" ng-click="organizationSave(detailOrganization)" class="button button-positive button-block"> Save Organization Details</button>
+                    </div>
+
+                </ion-footer-bar>-->
+                    </ion-slide>
+
+                  
+                </ion-slide-box>
+            </tab-slide-box>
+                <!--  </ion-slide-box>-->
+
+</ion-content>
+
+    
+</ion-view>

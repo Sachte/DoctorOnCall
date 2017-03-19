@@ -1,0 +1,65 @@
+<ion-view cache-view="false" view-title="Provider Appointments">
+    <form name="editCarpool" novalidate="" ng-submit="carpoolSave(editCarpool)">
+
+               
+                  <ion-content ng-class="{ isBrowserView : isBrowser== true }">
+                             
+                    
+                            
+                            <div class="item item-divider">                              
+                                 Provider - {{Provider.FirstName}} {{Provider.LastName}} 
+                            </div>
+                             
+                            <!--  <label class="item item-input" ng-class="{ 'has-errors' : Provider.EndLocation.$invalid, 'no-errors' : Provider.EndLocation.$valid}">
+                                <span class="input-label">Address</span>
+                                <ion-google-place ng-disabled="data.mode=='search'"  name="Address" ng-displayaddress="Provider.EndLocation.formatted_address" placeholder="Address" ng-model="Provider.EndLocation" required />
+                            </label>
+                            <label class="item item-input " ng-disabled  ng-class="{ 'has-errors' : Provider.TotalCostPerRide.$invalid, 'no-errors' : Provider.TotalCostPerRide.$valid}">
+
+                                <span class="input-label">Total Cost</span>
+                                <input ng-disabled="data.mode=='search'" name="TotalCostPerRide" type="number" placeholder="12.00" ng-model="Provider.TotalCostPerRide" required="required">
+
+                            </label>
+                         -->
+                                <label class="item  item-input " >
+                                <span class="input-label">
+                                   Appointment  Date
+                                </span>
+                                 <ionic-datepicker input-obj="datepickerObject">
+                                    <button class="button button-block button-positive"> {{datepickerObject.inputDate | date:datepickerObject.dateFormat}}</button>
+                                </ionic-datepicker>
+                              </label>
+                            
+                                
+                                  <ion-scroll direction="y">
+                                   <ion-list>
+                                        <div class="item item-divider">
+                                          Appointment Diary
+                                         
+                                        </div>
+                                      
+                                    
+                                    <ion-item ng-repeat=" item in Appointments" class="item-icon-right" ng-click="ManageAppointment(item)">
+                                        {{item.startDisplayTime}} - {{item.endDisplayTime}}  
+                                        <br>
+                                        <div ng-if="item.AppointmentStatus=='Booked'">
+                                            {{item.Subscriber.FirstName}} {{item.Subscriber.LastName}}
+                                        </div>
+                                          <div ng-if="item.AppointmentStatus!='Booked'">
+                                            <p> <b>Slot Available</b></p>
+                                        </div>
+                                            <i class="icon ion-chevron-right icon-accessory"></i>
+                                        
+                                    </ion-item>
+                                   
+                                </ion-list>
+                          </ion-scroll>
+                       
+                   
+             
+                            
+                      </div> 
+                      </ion-content>
+         
+    </form>
+</ion-view>

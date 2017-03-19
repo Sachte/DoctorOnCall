@@ -1,0 +1,71 @@
+﻿
+        <div class="card">
+
+
+            <div class="item item-divider">
+                Enter Carpool Details
+            </div>
+
+            <label class="item item-input validated" ng-class="{ 'has-errors' : newCarpool.carpoolName.$invalid, 'no-errors' : newCarpool.carpoolName.$valid}">
+                <span class="input-label">Carpool Name</span>
+                <input name="carpoolName" type="text" placeholder="Irvine-DIRECTV Carpool" ng-model="carpool.Name" required>
+            </label>
+
+            <div class="error-container" ng-show=" newCarpool.carpoolName.$error" ng-messages="newCarpool.carpoolName.$error" ng-if='newCarpool.carpoolName.$dirty' > <div ng-messages-include="error-list.html"> </div> </div>
+
+
+            <div class="spacer"></div>
+            <label class="item item-input validated" ng-class="{ 'has-errors' : newCarpool.Capacity.$invalid, 'no-errors' : newCarpool.Capacity.$valid}">
+                <span class="input-label">Max Capacity</span>
+                <input name="Capacity" type="number" placeholder="7" ng-model="carpool.Capacity" required>
+            </label>
+            <div class="error-container" ng-show=" newCarpool.Capacity.$error" ng-messages="newCarpool.Capacity.$error" ng-if='newCarpool.Capacity.$dirty' > <div ng-messages-include="error-list.html"> </div> </div>
+            <div class="spacer"></div>
+            <label class="item item-input validated " ng-class="{ 'has-errors' : newCarpool.CostPerRide.$invalid, 'no-errors' : newCarpool.CostPerRide.$valid}">
+
+                <span class="input-label">Cost Per Ride</span>
+                <input name="CostPerRide" ng-change="calculateFees()" type="number" placeholder="12.00" ng-model="carpool.CostPerRide" required="required">
+
+            </label>
+            <div class="error-container" ng-show=" newCarpool.CostPerRide.$error" ng-messages="newCarpool.CostPerRide.$error" ng-if='newCarpool.CostPerRide.$dirty' > <div ng-messages-include="error-list.html"> </div> </div>
+            <div class="spacer"></div>
+            <label class="item item-text-wrap ">
+                 <span ng-if="customer.CostPerRide>0">Your passenger will be charged a total of <b>${{carpool.TotalCostPerRide}}</b> and this includes a platform fee of <b> ${{carpool.PlatformFeePerRide}}</b></span>
+
+            </label>
+
+
+
+            <div ng-show="selectedType=='vanPool'">
+                <div class="list">
+                    <label class="item item-input validated " ng-class="{ 'has-errors' : newCarpool.FixedCost.$invalid, 'no-errors' : newCarpool.FixedCost.$valid}">
+                        <label class="item item-input">
+                            <span class="input-label">Rental Fee</span>
+                            <input name="FixedCost" type="number" placeholder="68.00" ng-model="carpool.FixedCost" ng-required="selectedType=='vanPool'">
+                        </label>
+                    </label>
+                    <div class="error-container" ng-show=" newCarpool.FixedCost.$error" ng-messages="newCarpool.FixedCost.$error" ng-if='newCarpool.FixedCost.$dirty' > <div ng-messages-include="error-list.html"> </div> </div>
+
+                    <label class="item item-input validated " ng-class="{ 'has-errors' : newCarpool.DriverCredit.$invalid, 'no-errors' : newCarpool.DriverCredit.$valid}">
+                        <label class="item item-input">
+                            <span class="input-label">Driver Credit</span>
+                            <input name="DriverCredit" type="number" placeholder="5.00" ng-model="carpool.DriverCredit" ng-required="selectedType=='vanPool'">
+                        </label>
+                    </label>
+                    <div class="error-container" ng-show=" newCarpool.DriverCredit.$error" ng-messages="newCarpool.DriverCredit.$error" ng-if='newCarpool.DriverCredit.$dirty' > <div ng-messages-include="error-list.html"> </div> </div>
+
+                    <label class="item item-input">
+                        <span class="input-label">Approx. Fuel Costs</span>
+                        <input type="number" placeholder="600.00" ng-model="carpool.ApproximateFuelCosts">
+                    </label>
+
+                </div>
+            </div>
+        </div>
+        <!--
+        <div class="button-bar-inline">
+            <button type="submit" ng-disabled="newCarpoolCost.$invalid" class="button button-stable button-block">Next</button>
+
+        </div>
+            -->
+ 

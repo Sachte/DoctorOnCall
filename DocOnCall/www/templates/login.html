@@ -1,0 +1,40 @@
+﻿<ion-view title='<img class="title-image" src="img/icon-40.png" />'  cache-view="false" hide-back-button="true" >
+
+    <ion-content class="padding">
+        <div class="list card">
+            <div class="item item-divider">Mobile Number Validation</div>
+              
+              <intlpn id="txtmobilenumber" ng-model="data.mobilenumber" placeholder="Enter your mobile number" default-country="jm"     box-header-class="bar-energized" box-header-title="Search country" search-placeholder="search"></intlpn>
+                 
+          <!--    <input id="txtmobilenumber" ng-model="data.mobilenumber" placeholder="Enter your mobile number" type="tel" />
+           -->
+            <div class="button-bar">
+                    <button id="btnValidateMobileNumber" type="button"  ng-disabled="data.mobilenumber==undefined||data.mobilenumber==''||data.loginClicked"  ng-click="loginUser(mobilenumber)" class="button button-positive button-block">Validate</button>
+                </div>
+           
+            </div>
+        <div>
+            <p> By Clicking on "Validate", I confirm that I have read the
+             
+                <a  href="#" onclick="window.open('http://doctoroncalljamaica.com/#/termsandconditions', '_system', 'location=no'); return false;">
+                    Terms and Conditions
+                </a>
+            
+            and the 
+         
+                <a  href="#" onclick="window.open('http://doctoroncalljamaica.com/#/privacy', '_system', 'location=no'); return false;">
+                    Privacy Policy
+                </a>,
+            
+            
+             and that I understand them and I agree to be bound by them.</p>
+        </div>
+</ion-content>
+</ion-view> 
+
+
+
+
+        
+      
+  

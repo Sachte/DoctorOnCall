@@ -1,0 +1,48 @@
+﻿<div class="modal">
+    <ion-header-bar>
+        <h1 class="title">{{data.selectedRide.Name}}</h1>
+    </ion-header-bar>
+    <ion-content>
+        
+                <div class="card">
+                    <div class="item-divider">Workbound - {{data.ridedate.toDateString()}}</div>
+                   
+                    <div class="row">
+                        <div class="col">
+                            <ion-toggle ng-model="data.workBoundJoinFlag" toggle-class="toggle-calm" ng-checked="data.workBoundJoinFlag">Join?</ion-toggle>
+                        </div>
+                        <div class="col">
+                            <ionic-timepicker input-obj="slots" ng-if="data.workBoundJoinFlag">
+
+                                <button type="button" class="button button-block button-positive"> @<standard-time-meridian etime='slots.inputEpochTime'></standard-time-meridian> </button>
+                            </ionic-timepicker>
+                            <!--   </label> -->
+                        </div>
+                    </div>
+              </div>
+       
+        <div class="card">
+            <div class="item-divider"> Homebound - {{data.ridedate.toDateString()}}</div>
+            <!--   <label class="item item-input item-stacked-label">
+                <span class="input-label">ETD</span>-->
+            <div class="row">
+                <div class="col">
+                    <ion-toggle ng-model="data.homeBoundJoinFlag " toggle-class="toggle-calm" ng-checked="data.homeBoundJoinFlag ">Join?</ion-toggle>
+                </div>
+                <div class="col">
+                    <ionic-timepicker input-obj="slotsHomebound" ng-if="data.homeBoundJoinFlag">
+
+                        <button type="button" class="button button-block button-positive"> @<standard-time-meridian etime='slotsHomebound.inputEpochTime'></standard-time-meridian> </button>
+                    </ionic-timepicker>
+                    <!--   </label>-->
+                </div>
+             </div>
+
+                </div>
+                <div class="row row-center">
+                    <div class="button-bar">
+                        <button class="button button-stable button-block" ng-click="closeJoinStatusModal()">Done</button>
+                    </div>
+                </div>
+</ion-content>
+</div>

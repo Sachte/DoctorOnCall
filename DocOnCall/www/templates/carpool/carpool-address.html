@@ -1,0 +1,25 @@
+﻿<div class="card">
+    <div class="item item-divider">
+        Enter Address Information
+    </div>
+    <label class="item item-input validated " ng-class="{ 'has-errors' : newCarpool.StartAddress.$invalid, 'no-errors' : newCarpool.StartAddress.$valid}">
+        <span class="input-label">Homebound Address</span>
+        <ion-google-place  name="StartAddress" ng-change="calculateDistance('homeBound')"  ng-displayaddress="carpool.StartAddress.formatted_address" placeholder="Enter Start Address" ng-model="carpool.StartAddress" required />
+    </label>
+    <div class="error-container" ng-show=" newCarpool.StartAddress.$error" ng-messages="newCarpool.StartAddress.$error" ng-if='newCarpool.StartAddress.$dirty' > <div ng-messages-include="error-list.html"> </div> </div>
+
+
+
+    <label class="item item-input validated" ng-class="{ 'has-errors' : newCarpool.EndAddress.$invalid, 'no-errors' : newCarpool.EndAddress.$valid}">
+        <span class="input-label">Workbound Address</span>
+        <ion-google-place name="EndAddress" ng-change="calculateDistance('workBound')" ng-displayaddress="carpool.EndAddress.formatted_address" placeholder="Enter End Address" ng-model="carpool.EndAddress" required />
+    </label>
+    <div class="error-container" ng-show=" newCarpool.EndAddress.$error" ng-messages="newCarpool.EndAddress.$error" ng-if='newCarpool.EndAddress.$dirty' > <div ng-messages-include="error-list.html"> </div> </div>
+
+    <label class="item item-input validated" ng-class="{ 'has-errors' : newCarpool.Distance.$invalid, 'no-errors' : newCarpool.Distance.$valid}">
+        <span class="input-label">Distance </span>
+        <input name="Distance" type="number" placeholder="40" ng-model="carpool.Distance" required>
+    </label>
+    <div class="error-container" ng-show=" newCarpool.Distance.$error" ng-messages="newCarpool.Distance.$error" ng-if='newCarpool.Distance.$dirty' > <div ng-messages-include="error-list.html"> </div> </div>
+
+</div>

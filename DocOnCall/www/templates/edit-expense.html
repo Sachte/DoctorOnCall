@@ -1,0 +1,66 @@
+﻿<ion-view view-title="Edit Expense">
+    <ion-content has-header="false" padding="true">
+
+        <div class="list">
+
+            <div class="item item-divider">
+               Edit Expense Details
+            </div>
+
+              <label class="item text-left" name="carpool">
+                  <span class="input-label">Carpool Name : {{expense.Name}}</span>               
+                  <span class="input-label">Expense Date: {{expense.ExpenseDate| date:'longDate'}} </span>
+               </label>
+              <!-- <label class="item item-select" name="Spender">
+                    <span class="input-label">Paid By</span>
+                    <select ng-model="expense.Spender" ng-options="ridepassenger.DisplayName for ridepassenger in data.RidePassengers"></select>
+                </label>--> 
+
+            <label class="item item-input-inset" >
+                <span class="input-label">Paid by</span>
+
+                <!-- <select ng-disabled="data.mode=='search'" ng-change="updateWorkBoundDriver()" ng-model="data.workBoundDriver" ng-options="passenger.DisplayName for passenger in drivers=(workBoundRide.RidePassengers| filter: isActiveDriver) "></select> -->
+                <input ion-autocomplete name="driver"  type="text" ng-model="expense.Spender" items-method="data.RidePassengers" item-view-value-key="DisplayName" autocomplete="off" max-selected-items="1" required select-items-label="Select the Payor" selected-items-label="Selected Payor:" />
+                <i class="icon ion-arrow-down-b "></i>
+            </label>
+
+            <label class="item item-input-inset">
+                <span class="input-label">Expense Type</span>
+
+                <!-- <select ng-disabled="data.mode=='search'" ng-change="updateWorkBoundDriver()" ng-model="data.workBoundDriver" ng-options="passenger.DisplayName for passenger in drivers=(workBoundRide.RidePassengers| filter: isActiveDriver) "></select> -->
+                <input ion-autocomplete name="expenseType" type="text" ng-model="expense.ExpenseType" items-method="data.ExpenseTypes" item-value-key="ExpenseType" item-view-value-key="ExpenseType" autocomplete="off" max-selected-items="1" required select-items-label="Select the Expense Type" selected-items-label="Selected Expense Type:" />
+                <i class="icon ion-arrow-down-b "></i>
+            </label>
+
+
+                <label class="item item-input">
+                    <span class="input-label">Expense Amount</span>
+                    <input type="number" placeholder="45.00" ng-model="expense.ExpenseAmount">
+                </label>
+                 <label class="item item-input">
+                    <span class="input-label"><b>Description</b></span>
+                    <input type="text" placeholder="Gas Expense" ng-model="expense.ExpenseDescription">
+                  </label>
+
+            <div ng-if="data.isCamera">
+                <button ng-click="getPhoto()" class="button button-block button-primary">Take Photo of Receipt</button>
+             </div>
+            <div ng-if="data.imagesrc!=''">
+                <img class="full-image" ng-src="{{data.imagesrc}}" style="max-width: 100%">
+            </div>
+
+        </div>
+
+       
+    </ion-content>
+
+     <ion-footer-bar  class="item-input-inset">
+
+        <div class="button-bar">
+            <button class="button button-stable button-block" ng-click="save()">Save Expense</button>
+ 
+        </div>
+
+    </ion-footer-bar>
+
+</ion-view>
