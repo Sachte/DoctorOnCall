@@ -2,4 +2,4 @@
 
 Website: http://www.doctoroncalljamaica.com/
 Play Store Link: https://play.google.com/store/apps/details?id=com.zipcommute.doctoroncallglobal&hl=en
-Apple Store Link: https://itunes.apple.com/us/app/doctor-on-call-global/id1168358126?mt=8
+App Store Link: https://itunes.apple.com/us/app/doctor-on-call-global/id1168358126?mt=8
